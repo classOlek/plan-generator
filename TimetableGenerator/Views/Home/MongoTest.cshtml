@@ -1,0 +1,11 @@
+﻿@model List<int>
+@{
+    ViewData["Title"] = "MongoDB Test";
+}
+<h1>@ViewData["Title"]</h1>
+
+@foreach (int row in Model)
+{
+    @row<br/>
+}
+<a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="AddRandomNumber">Add random number</a>
