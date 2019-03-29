@@ -11,23 +11,11 @@ namespace TimetableGenerator.Controllers
     public class HomeController : Controller
     {
 
-        private DatabaseHandler databaseHandler = DatabaseHandler.GetInstance();
+        private DatabaseService databaseHandler = DatabaseService.GetInstance();
 
         public IActionResult Index()
         {
             return View();
-        }
-
-        public IActionResult MongoTest()
-        {
-            List<int> numberList = databaseHandler.GetTestNumbers();
-            return View("MongoTest", numberList);
-        }
-
-        public IActionResult AddRandomNumber()
-        {
-            databaseHandler.AddTestNumber(new Random().Next(0, 100));
-            return MongoTest();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
