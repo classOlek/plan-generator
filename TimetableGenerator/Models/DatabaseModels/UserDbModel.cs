@@ -4,11 +4,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace TimetableGenerator.Models
+namespace TimetableGenerator.Models.DatabaseModels
 {
-    public class ValueEntity
+    public class UserDbModel
     {
         public ObjectId _id { get; set; }
-        public int value { get; set; }
+        public string Name { get; set; }
+        public string HashedPassword { get; set; }
     }
 }
