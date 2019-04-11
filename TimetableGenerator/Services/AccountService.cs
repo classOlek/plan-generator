@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TimetableGenerator.Models;
 using TimetableGenerator.Models.DatabaseModels;
 using TimetableGenerator.Models.LocalModels;
 
@@ -9,36 +10,27 @@ namespace TimetableGenerator.Services
 {
     public class AccountService
     {
-        private static AccountService instance;
+        private readonly DatabaseService _databaseService;
+        private readonly CryptographyService _cryptographyService;
 
-        private DatabaseService databaseService;
-
-        public static AccountService GetInstance()
+        public AccountService(DatabaseService databaseService, CryptographyService cryptographyService)
         {
-            if(instance == null)
-            {
-                instance = new AccountService();
-            }
-            return instance;
-        }        
-
-        private AccountService()
-        {
-            databaseService = DatabaseService.GetInstance();
+            _databaseService = databaseService;
+            _cryptographyService = cryptographyService;
         }
 
-        public UserCreationStatus CreateUser(string name, string password)
+        public CreationStatus CreateUser(string name, string password)
         {
             if(GetUser(name) != null)
             {
-                return UserCreationStatus.UserExists;
+                return CreationStatus.AlreadyExists;
             }
-            return databaseService.CreateUser(name, CryptographyService.GetInstance().sha256(password));
+            return _databaseService.CreateUser(name, _cryptographyService.sha256(password));
         }
 
         public User GetUser(string name)
         {
-            UserDbModel userDbModel = databaseService.GetUser(name);
+            UserDbModel userDbModel = _databaseService.GetUser(name);
             if (userDbModel == null)
                 return null;
 
@@ -47,8 +39,8 @@ namespace TimetableGenerator.Services
 
         public User GetUser(string name, string password)
         {
-            UserDbModel userDbModel = databaseService.GetUser(name);
-            if(userDbModel == null || CryptographyService.GetInstance().sha256(password) != userDbModel.HashedPassword)
+            UserDbModel userDbModel = _databaseService.GetUser(name);
+            if(userDbModel == null || _cryptographyService.sha256(password) != userDbModel.HashedPassword)
             {
                 return null;
             }

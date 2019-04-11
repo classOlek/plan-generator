@@ -11,40 +11,63 @@ namespace TimetableGenerator
 {
     public class DatabaseService
     {
-        private static DatabaseService instance = null;
         private MongoClient client;
 
-        public static DatabaseService GetInstance()
+        public IEnumerable<TimetableDataDbModel> GetTimetableDataDbModels(string name)
         {
-            if(instance == null)
+            try
             {
-                instance = new DatabaseService();
+                return GetTimetableDataCollection()
+                    .Find<TimetableDataDbModel>(m => m.Owner.Equals(name)).ToList();
             }
-            return instance;
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
-        public UserCreationStatus CreateUser(string name, string hashedPassword)
+        public CreationStatus CreateCourseData(TimetableDataDbModel model)
+        {
+            try
+            {
+                GetTimetableDataCollection()
+                    .InsertOne(model);
+                return CreationStatus.Created;
+            }
+            catch (Exception)
+            {
+                return CreationStatus.ExceptionThrown;
+            }
+        }
+
+        public CreationStatus CreateUser(string name, string hashedPassword)
         {
             try
             {
                 GetUsersCollection()
                     .InsertOne(new UserDbModel { Name = name, HashedPassword = hashedPassword });
-                return UserCreationStatus.Created;
+                return CreationStatus.Created;
             }
             catch (Exception)
             {
-                return UserCreationStatus.ExceptionThrown;
+                return CreationStatus.ExceptionThrown;
             }
         }
 
         public UserDbModel GetUser(string name)
         {
-            return GetUsersCollection()
-                .Find<UserDbModel>(m => m.Name.Equals(name))
-                .FirstOrDefault();
+            try
+            {
+                return GetUsersCollection()
+                    .Find<UserDbModel>(m => m.Name.Equals(name))
+                    .FirstOrDefault();
+            } catch (Exception)
+            {
+                return null;
+            }
         }
 
-        private DatabaseService()
+        public DatabaseService()
         {
             MongoClientSettings settings = new MongoClientSettings
             {
@@ -61,7 +84,12 @@ namespace TimetableGenerator
 
         private IMongoCollection<UserDbModel> GetUsersCollection()
         {
-            return GetDatabase().GetCollection<UserDbModel>("Users");
+            return GetDatabase().GetCollection<UserDbModel>(Configuration.DatabaseUsersCollectionName);
+        }
+
+        private IMongoCollection<TimetableDataDbModel> GetTimetableDataCollection()
+        {
+            return GetDatabase().GetCollection<TimetableDataDbModel>(Configuration.DatabaseTimetableDataCollectionName);
         }
     }
 }

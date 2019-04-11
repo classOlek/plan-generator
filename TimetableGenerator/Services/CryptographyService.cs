@@ -8,19 +8,6 @@ namespace TimetableGenerator.Services
 {
     public class CryptographyService
     {
-        private static CryptographyService instance;
-
-        public static CryptographyService GetInstance()
-        {
-            if(instance == null)
-            {
-                instance = new CryptographyService();
-            }
-            return instance;
-        }
-
-        private CryptographyService() {}
-
         public string sha256(string randomString)
         {
             var crypt = new System.Security.Cryptography.SHA256Managed();

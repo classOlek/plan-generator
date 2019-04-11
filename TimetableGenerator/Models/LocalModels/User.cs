@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace TimetableGenerator.Models.LocalModels
+namespace TimetableGenerator.Models
 {
     public class User
     {

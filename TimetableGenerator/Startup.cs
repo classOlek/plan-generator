@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using TimetableGenerator.Services;
 
 namespace TimetableGenerator
 {
@@ -47,6 +48,11 @@ namespace TimetableGenerator
                 };
             });
 
+            services.AddSingleton<AccountService, AccountService>();
+            services.AddSingleton<CryptographyService, CryptographyService>();
+            services.AddSingleton<TimetableConfigService, TimetableConfigService>();
+            services.AddSingleton<DatabaseService, DatabaseService>();
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
@@ -59,7 +65,7 @@ namespace TimetableGenerator
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/Client/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
@@ -74,7 +80,7 @@ namespace TimetableGenerator
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Client}/{action=Index}/{id?}");
             });
         }
     }
