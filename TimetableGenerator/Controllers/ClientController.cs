@@ -8,14 +8,20 @@ using TimetableGenerator.Models;
 
 namespace TimetableGenerator.Controllers
 {
-    public class HomeController : Controller
+    public class ClientController : Controller
     {
 
         private DatabaseService databaseHandler = DatabaseService.GetInstance();
 
         public IActionResult Index()
         {
-            return View();
+            return View("Index");
+        }
+
+        [HttpPost]
+        public IActionResult Login([FromForm] string login, [FromForm] string password)
+        {
+            return Index();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

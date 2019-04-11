@@ -10,5 +10,6 @@ namespace TimetableGenerator
         public static string DatabaseIpAddress = "localhost";
         public static int DatabasePort = 27017;
         public static string DatabaseName = "TimetableGenerator";
+        public static string DatabaseUsersCollectionName = "Users";
     }
 }

@@ -39,9 +39,15 @@ namespace TimetableGenerator
 
         public UserDbModel GetUser(string name)
         {
-            return GetUsersCollection()
-                .Find<UserDbModel>(m => m.Name.Equals(name))
-                .FirstOrDefault();
+            try
+            {
+                return GetUsersCollection()
+                    .Find<UserDbModel>(m => m.Name.Equals(name))
+                    .FirstOrDefault();
+            } catch (Exception)
+            {
+                return null;
+            }
         }
 
         private DatabaseService()
@@ -61,7 +67,7 @@ namespace TimetableGenerator
 
         private IMongoCollection<UserDbModel> GetUsersCollection()
         {
-            return GetDatabase().GetCollection<UserDbModel>("Users");
+            return GetDatabase().GetCollection<UserDbModel>(Configuration.DatabaseUsersCollectionName);
         }
     }
 }

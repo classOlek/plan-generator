@@ -71,7 +71,7 @@ namespace TimetableGenerator.Controllers
         public async Task<IActionResult> Logout()
         {
             await Request.HttpContext.SignOutAsync();
-            return Ok();
+            return Ok(new { response = "User logged out" });
         }
 
         [AllowAnonymous]
