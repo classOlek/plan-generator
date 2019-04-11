@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 
 namespace TimetableGenerator.Models.LocalModels
 {
-    public enum UserCreationStatus
+    public enum CreationStatus
     {
-        Created, UserExists, ExceptionThrown 
+        Created, AlreadyExists, ExceptionThrown 
     }
 }

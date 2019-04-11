@@ -36,14 +36,14 @@
                 </div>
                 @if (User.Identity.IsAuthenticated)
                 {
-                    <a id="logout_button" class="btn btn-danger" href="account/logout">Logout!</a>
+                    <a id="logout_button" class="btn btn-danger" href="api/account/logout">Logout!</a>
                 }
                 else
                 {
                     <button id="register_button" type="button" class="btn btn-danger" data-toggle="popover" data-placement="bottom" title="Registration panel">Register!</button>
                     <button id="login_button" type="button" style="margin-left: 10px" class="btn btn-primary" data-toggle="popover" data-placement="bottom" title="Login panel">Login!</button>
                     <div id="login_popover_content" hidden>
-                        <form action="account/login" method="POST">
+                        <form action="api/account/login" method="POST">
                             <div class="form-group">
                                 <label for="inputLogin">Login</label>
                                 <input name="login" type="text" class="form-control" id="inputLogin" aria-describedby="inputLogin" placeholder="Login">
@@ -56,7 +56,7 @@
                         </form>
                     </div>
                     <div id="register_popover_content" hidden>
-                        <form action="account/register" method="POST">
+                        <form action="api/account/register" method="POST">
                             <div class="form-group">
                                 <label for="inputLogin">Login</label>
                                 <input name="login" type="text" class="form-control" id="inputLogin" aria-describedby="inputLogin" placeholder="Login">

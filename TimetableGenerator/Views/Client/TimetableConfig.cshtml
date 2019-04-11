@@ -1,0 +1,37 @@
+﻿@model IEnumerable<TimetableData>
+@{
+    ViewData["Title"] = "TimetableConfig";
+}
+
+<h1>TimetableConfig</h1>
+
+<form name="form1" method="post" enctype="multipart/form-data" action="api/timetable/uploadCourses">
+    <div>
+        <input name="file" type="file" />
+    </div>
+    <div>
+        <input type="submit" value="Submit" />
+    </div>
+</form>
+<br/>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Source</th>
+            <th scope="col">Time</th>
+            <th scope="col">Groups</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 1; i <= Model.Count(); i++)
+        {
+            <tr>
+                <th scope="row">@i</th>
+                <td>@Model.ElementAt(i-1).SourceName</td>
+                <td>@Model.ElementAt(i-1).Time</td>
+                <td>@Model.ElementAt(i-1).CourseList.Count()</td>
+            </tr>
+        }
+    </tbody>
+</table>

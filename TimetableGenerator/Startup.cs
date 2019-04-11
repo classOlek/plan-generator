@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using TimetableGenerator.Services;
 
 namespace TimetableGenerator
 {
@@ -46,6 +47,11 @@ namespace TimetableGenerator
                     }
                 };
             });
+
+            services.AddSingleton<AccountService, AccountService>();
+            services.AddSingleton<CryptographyService, CryptographyService>();
+            services.AddSingleton<TimetableConfigService, TimetableConfigService>();
+            services.AddSingleton<DatabaseService, DatabaseService>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }

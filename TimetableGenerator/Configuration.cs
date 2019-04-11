@@ -11,5 +11,6 @@ namespace TimetableGenerator
         public static int DatabasePort = 27017;
         public static string DatabaseName = "TimetableGenerator";
         public static string DatabaseUsersCollectionName = "Users";
+        public static string DatabaseTimetableDataCollectionName = "TimetableData";
     }
 }

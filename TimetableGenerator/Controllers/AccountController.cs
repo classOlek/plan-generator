@@ -7,26 +7,34 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using TimetableGenerator.Models;
 using TimetableGenerator.Models.LocalModels;
 using TimetableGenerator.Services;
 
 namespace TimetableGenerator.Controllers
 {
     [Authorize]
+    [Route("api/[controller]")]
+    [ApiController]
     public class AccountController : Controller
     {
 
-        AccountService accountService = AccountService.GetInstance();
+        AccountService _accountService;
+
+        public AccountController(AccountService accountService)
+        {
+            _accountService = accountService;
+        }
 
         [AllowAnonymous]
-        [HttpPost]
+        [HttpPost("login")]
         public async Task<IActionResult> Login([FromForm] string login, [FromForm] string password)
         {
             if(IsUserLoggedIn(out User user))
             {
                 return StatusCode((int)HttpStatusCode.Forbidden, new { response = "User already logged in" });
             }
-            if(accountService.GetUser(login, password) != null) {
+            if(_accountService.GetUser(login, password) != null) {
                 var claimsIdentity = new ClaimsIdentity(new[]
                 {
                     new Claim(ClaimTypes.Name, login),
@@ -40,7 +48,7 @@ namespace TimetableGenerator.Controllers
         }
 
         [AllowAnonymous]
-        [HttpPost]
+        [HttpPost("register")]
         public IActionResult Register([FromForm] string login, [FromForm] string password, [FromForm] string password2)
         {
             if(!(CheckLoginFormat(login) && CheckPasswordFormat(password))) {
@@ -54,20 +62,20 @@ namespace TimetableGenerator.Controllers
                     new { response = "Password are not equal" });
             }
 
-            UserCreationStatus status = accountService.CreateUser(login, password);
+            CreationStatus status = _accountService.CreateUser(login, password);
             switch(status)
             {
-                case UserCreationStatus.UserExists:
+                case CreationStatus.AlreadyExists:
                     return StatusCode((int)HttpStatusCode.Forbidden, new { response = "User already exists" });
-                case UserCreationStatus.ExceptionThrown:
+                case CreationStatus.ExceptionThrown:
                     return StatusCode((int)HttpStatusCode.InternalServerError, new { response = "Server error, please contact administrator" }); ;
-                case UserCreationStatus.Created:
+                case CreationStatus.Created:
                 default:
                     return Ok(new { response = "User created"});
             }
         }
 
-        [HttpGet]
+        [HttpGet("logout")]
         public async Task<IActionResult> Logout()
         {
             await Request.HttpContext.SignOutAsync();
@@ -75,13 +83,13 @@ namespace TimetableGenerator.Controllers
         }
 
         [AllowAnonymous]
-        [HttpGet]
+        [HttpGet("isLoggedIn")]
         public IActionResult IsLoggedIn()
         {
             return Ok(new { login = IsUserLoggedIn(out User user) });
         }
 
-        [HttpGet]
+        [HttpGet("testLogin")]
         public IActionResult TestLogin()
         {
             return Ok(new { response = $"Logged in as {GetUserName()}"});
@@ -89,7 +97,7 @@ namespace TimetableGenerator.Controllers
 
         private bool IsUserLoggedIn(out User user)
         {
-            user = accountService.GetUser(GetUserName());
+            user = _accountService.GetUser(GetUserName());
             return user != null;
         }
 
