@@ -28,6 +28,11 @@ namespace TimetableGenerator.Services
             return _databaseService.CreateUser(name, _cryptographyService.sha256(password));
         }
 
+        public bool UpdateUserConditions(string name, string conditions)
+        {
+            return _databaseService.UpdateUserConditions(name, conditions);
+        }
+
         public User GetUser(string name)
         {
             UserDbModel userDbModel = _databaseService.GetUser(name);
@@ -51,7 +56,8 @@ namespace TimetableGenerator.Services
         {
             return new User
             {
-                Name = userDbModel.Name
+                Name = userDbModel.Name,
+                Conditions = userDbModel.Conditions
             };
         }
     }

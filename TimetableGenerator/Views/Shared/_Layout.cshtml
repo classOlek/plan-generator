@@ -76,6 +76,13 @@
             </div>
         </nav>
     </header>
+
+    <environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/js/jquery-sortable.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    </environment>
+
     <div class="container">
         <partial name="_CookieConsentPartial" />
         <main role="main" class="pb-3">
@@ -88,11 +95,6 @@
             &copy; 2019 - TimetableGenerator
         </div>
     </footer>
-
-    <environment include="Development">
-        <script src="~/lib/jquery/dist/jquery.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
-    </environment>
     <environment exclude="Development">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
                 asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
@@ -109,7 +111,8 @@
     </environment>
     <script src="~/js/site.js" asp-append-version="true"></script>
 
-    @if (!User.Identity.IsAuthenticated) {
+    @if (!User.Identity.IsAuthenticated)
+    {
         <script>
             $(document).ready(function () {
                 $('#login_button').popover({

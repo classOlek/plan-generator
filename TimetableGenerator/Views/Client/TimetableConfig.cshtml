@@ -1,37 +1,104 @@
-﻿@model IEnumerable<TimetableData>
+﻿@model TimetableConfig
 @{
     ViewData["Title"] = "TimetableConfig";
 }
 
-<h1>TimetableConfig</h1>
+<script>
+    var currentId = 1;
+    function removeElement(id) {
+        var element = document.getElementById(id);
+        element.parentNode.removeChild(element);
+    }
 
-<form name="form1" method="post" enctype="multipart/form-data" action="api/timetable/uploadCourses">
-    <div>
-        <input name="file" type="file" />
-    </div>
-    <div>
-        <input type="submit" value="Submit" />
-    </div>
-</form>
-<br/>
-<table class="table">
-    <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Source</th>
-            <th scope="col">Time</th>
-            <th scope="col">Groups</th>
-        </tr>
-    </thead>
-    <tbody>
-        @for (int i = 1; i <= Model.Count(); i++)
-        {
-            <tr>
-                <th scope="row">@i</th>
-                <td>@Model.ElementAt(i-1).SourceName</td>
-                <td>@Model.ElementAt(i-1).Time</td>
-                <td>@Model.ElementAt(i-1).CourseList.Count()</td>
-            </tr>
+    function saveSettings(elementId) {
+        var saveButton = document.getElementById('saveButton');
+        saveButton.disabled = true;
+        var element = document.getElementById(elementId);
+        var children = element.children;
+        var returnJson = [];
+        for (var i = 0; i < children.length; i++) {
+            if (children[i].classList.contains('noClassesBefore')) {
+                var selectList = $(children[i]).find('select');
+                returnJson.push({ 'type': 'noClassesBefore', 'day': selectList.eq(1).val(), 'hour': selectList.eq(0).val() });
+            } else if (children[i].classList.contains('noClassesAfter')) {
+                var selectList = $(children[i]).find('select');
+                returnJson.push({ 'type': 'noClassesAfter', 'day': selectList.eq(1).val(), 'hour': selectList.eq(0).val() });
+            }
         }
-    </tbody>
-</table>
+        document.getElementById('saveFormData').value = JSON.stringify(returnJson);
+        document.getElementById('saveForm').submit();
+    }
+
+</script>
+
+<script src="~/js/conditionsUIGenerator.js"></script>
+
+<form method="POST" action="/api/account/updateConditions" id="saveForm">
+    <input type="hidden" name="saveFormData" id="saveFormData" value="[]">
+</form>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 panel">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Source</th>
+                        <th scope="col">Time</th>
+                        <th scope="col">Groups</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 1; i <= Model.TimetableDataList.Count(); i++)
+                    {
+                        <tr>
+                            <th scope="row">@i</th>
+                            <td>@Model.TimetableDataList.ElementAt(i - 1).SourceName</td>
+                            <td>@Model.TimetableDataList.ElementAt(i - 1).Time</td>
+                            <td>@Model.TimetableDataList.ElementAt(i - 1).CourseList.Count()</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <hr style="border-top: 1px solid #8c8b8b;" />
+            <form name="form1" method="post" enctype="multipart/form-data" action="api/timetable/uploadCourses">
+                Add new data source: <div>
+                    <input name="file" type="file" />
+                </div>
+                <div>
+                    <input type="submit" class="btn btn-primary" value="Submit" />
+                </div>
+            </form>
+        </div>
+        <div class="col-md-1" style="background-color:none;">
+        </div>
+        <div class="col-md-7" style="background-color:none;">
+            <ul id="sortable" class="list-group">
+            </ul>
+            <button id="saveButton" class="btn btn-primary" onclick="saveSettings('sortable');">Save</button>
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Add condition
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" onclick="addNoClassesBefore(currentId++, 'sortable', 'Monday', '8:00');">No classes before</a>
+                    <a class="dropdown-item" onclick="addNoClassesAfter(currentId++, 'sortable', 'Monday', '8:00');">No classes after</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function addCondition(condition) {
+        if (condition.type == 'noClassesAfter') {
+            addNoClassesAfter(currentId++, 'sortable', condition.day, condition.hour);
+        } else if (condition.type == 'noClassesBefore') {
+            addNoClassesBefore(currentId++, 'sortable', condition.day, condition.hour);
+        }
+    }
+
+    var conditions = JSON.parse('@Html.Raw(@Model.User.Conditions)');
+    conditions.forEach(condition => addCondition(condition));
+    $("#sortable").sortable();
+</script>

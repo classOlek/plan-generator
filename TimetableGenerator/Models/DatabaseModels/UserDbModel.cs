@@ -11,5 +11,6 @@ namespace TimetableGenerator.Models.DatabaseModels
         public ObjectId _id { get; set; }
         public string Name { get; set; }
         public string HashedPassword { get; set; }
+        public string Conditions { get; set; }
     }
 }

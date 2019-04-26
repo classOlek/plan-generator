@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using TimetableGenerator.Models;
 using TimetableGenerator.Models.LocalModels;
 using TimetableGenerator.Services;
@@ -68,11 +70,20 @@ namespace TimetableGenerator.Controllers
                 case CreationStatus.AlreadyExists:
                     return StatusCode((int)HttpStatusCode.Forbidden, new { response = "User already exists" });
                 case CreationStatus.ExceptionThrown:
-                    return StatusCode((int)HttpStatusCode.InternalServerError, new { response = "Server error, please contact administrator" }); ;
+                    return StatusCode((int)HttpStatusCode.InternalServerError, new { response = "Server error, please contact administrator" });
                 case CreationStatus.Created:
                 default:
                     return Ok(new { response = "User created"});
             }
+        }
+
+        [HttpPost("updateConditions")]
+        public IActionResult UpdateConditions([FromForm] string saveFormData)
+        {
+            if (IsValidJson(saveFormData) && _accountService.UpdateUserConditions(GetUserName(), saveFormData)){
+                return Ok(new { response = "Conditions saved" });
+            }
+            return StatusCode((int)HttpStatusCode.InternalServerError, new { response = "Server error, please contact administrator" });
         }
 
         [HttpGet("logout")]
@@ -129,6 +140,35 @@ namespace TimetableGenerator.Controllers
                 return true;
             }
             return false;
+        }
+
+        private bool IsValidJson(string strInput)
+        {
+            strInput = strInput.Trim();
+            if ((strInput.StartsWith("{") && strInput.EndsWith("}")) || //For object
+                (strInput.StartsWith("[") && strInput.EndsWith("]"))) //For array
+            {
+                try
+                {
+                    var obj = JToken.Parse(strInput);
+                    return true;
+                }
+                catch (JsonReaderException jex)
+                {
+                    //Exception in parsing json
+                    Console.WriteLine(jex.Message);
+                    return false;
+                }
+                catch (Exception ex) //some other exception
+                {
+                    Console.WriteLine(ex.ToString());
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

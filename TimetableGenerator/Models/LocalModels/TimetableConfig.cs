@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace TimetableGenerator.Models
 {
-    public class User
+    public class TimetableConfig
     {
-        public string Name { get; set; }
-        public string Conditions { get; set; }
+        public User User { get; set; }
+        public IEnumerable<TimetableData> TimetableDataList { get; set; }
     }
 }

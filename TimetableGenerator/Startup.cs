@@ -48,10 +48,10 @@ namespace TimetableGenerator
                 };
             });
 
-            services.AddSingleton<AccountService, AccountService>();
-            services.AddSingleton<CryptographyService, CryptographyService>();
-            services.AddSingleton<TimetableConfigService, TimetableConfigService>();
-            services.AddSingleton<DatabaseService, DatabaseService>();
+            services.AddScoped<AccountService, AccountService>();
+            services.AddScoped<CryptographyService, CryptographyService>();
+            services.AddScoped<TimetableConfigService, TimetableConfigService>();
+            services.AddScoped<DatabaseService, DatabaseService>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }

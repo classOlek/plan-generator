@@ -13,6 +13,29 @@ namespace TimetableGenerator
     {
         private MongoClient client;
 
+        public DatabaseService()
+        {
+            MongoClientSettings settings = new MongoClientSettings
+            {
+                Server = new MongoServerAddress(Configuration.DatabaseIpAddress, Configuration.DatabasePort),
+                UseSsl = false
+            };
+            client = new MongoClient(settings);
+        }
+
+        public bool UpdateUserConditions(string name, string conditions)
+        {
+            var updateDef = Builders<UserDbModel>.Update.Set(o => o.Conditions, conditions);
+            try
+            {
+                GetUsersCollection().UpdateOne<UserDbModel>(o => o.Name == name, updateDef);
+                return true;
+            }catch (Exception)
+            {
+                return false;
+            }
+        }
+
         public IEnumerable<TimetableDataDbModel> GetTimetableDataDbModels(string name)
         {
             try
@@ -65,16 +88,6 @@ namespace TimetableGenerator
             {
                 return null;
             }
-        }
-
-        public DatabaseService()
-        {
-            MongoClientSettings settings = new MongoClientSettings
-            {
-                Server = new MongoServerAddress(Configuration.DatabaseIpAddress, Configuration.DatabasePort),
-                UseSsl = false
-            };
-            client = new MongoClient(settings);
         }
 
         private IMongoDatabase GetDatabase()
