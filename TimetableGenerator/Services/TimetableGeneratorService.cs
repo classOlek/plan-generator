@@ -36,7 +36,7 @@ namespace TimetableGenerator.Services
                 }
             } else
             {
-                returnList.Add(new Timetable { GroupList = prevTimetable });
+                if(prevTimetable.Count > 0) returnList.Add(new Timetable { GroupList = prevTimetable });
             }
         }
     }
