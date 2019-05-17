@@ -10,15 +10,16 @@ It is a web application designed to select proper timetable from available cours
 ```
 git clone https://github.com/classOlek/plan-generator.git
 ```
-2. Build project
+2. Edit 'Configuration.cs' file, fill it with MongoDB credentials
+3. Build project
 ```
 dotnet build
 ```
-3. Run server
+4. Run server
 ```
 dotnet run --project TimetableGenerator
 ```
-4. Open web browser and visit url displayed in cmd.
+5. Open web browser and visit url displayed in cmd.
 
 # Api information
 This application is designed to work as web api, with client written in VUE.JS framework.
