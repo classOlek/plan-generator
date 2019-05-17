@@ -11,6 +11,7 @@ namespace TimetableGenerator.Models
         public string Owner { get; set; }
         public string SourceName { get; set; }
         public DateTime Time { get; set; }
+        public int HashCode { get; set; }
         public IEnumerable<CourseData> CourseList { get; set; }
     }
 }

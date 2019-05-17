@@ -3,6 +3,9 @@
     ViewData["Title"] = "TimetableConfig";
 }
 
+<link rel="stylesheet" href="~/css/modal.css" />
+<link rel="stylesheet" href="~/css/simplePagination.css" />
+
 <script>
     var currentId = 1;
     function removeElement(id) {
@@ -31,6 +34,7 @@
 
 </script>
 
+<script src="~/js/pagination.js"></script>
 <script src="~/js/conditionsUIGenerator.js"></script>
 
 <form method="POST" action="/api/account/updateConditions" id="saveForm">
@@ -39,7 +43,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-4 panel">
+        <div class="col-md-5 panel">
             <table class="table">
                 <thead>
                     <tr>
@@ -47,6 +51,7 @@
                         <th scope="col">Source</th>
                         <th scope="col">Time</th>
                         <th scope="col">Groups</th>
+                        <th scope="col">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -57,6 +62,7 @@
                             <td>@Model.TimetableDataList.ElementAt(i - 1).SourceName</td>
                             <td>@Model.TimetableDataList.ElementAt(i - 1).Time</td>
                             <td>@Model.TimetableDataList.ElementAt(i - 1).CourseList.Count()</td>
+                            <td><input type="submit" onclick="showModal(@Model.TimetableDataList.ElementAt(i - 1).HashCode)" class="btn btn-primary" value=">" /></td>
                         </tr>
                     }
                 </tbody>
@@ -71,11 +77,9 @@
                 </div>
             </form>
         </div>
-        <div class="col-md-1" style="background-color:none;">
-        </div>
+
         <div class="col-md-7" style="background-color:none;">
-            <ul id="sortable" class="list-group">
-            </ul>
+            <ul id="sortable" class="list-group"></ul>
             <button id="saveButton" class="btn btn-primary" onclick="saveSettings('sortable');">Save</button>
             <div class="dropdown">
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -89,6 +93,102 @@
         </div>
     </div>
 </div>
+
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <div id="closeModal" class="close2">&times;</div>
+        <div id="actual-modal-content"><p>Some text in the Modal..</p></div>
+    </div>
+</div>
+
+<script>
+    var modal = document.getElementById("myModal");
+    var btn = document.getElementById("myBtn");
+    var span2 = document.getElementById("closeModal");
+    var content = document.getElementById("actual-modal-content");
+
+    var timetableData = null;
+    var timetableCurrent = 0;
+    var timetableDisplay = false;
+
+    function showModal(hashCode) {
+        content.innerHTML = '<strong>Loading...</strong>';
+        modal.style.display = "block";
+        fetch(window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + "/api/timetable/getCourseData?hashCode=" + hashCode)
+            .then(data => data.json())
+            .then(data => {
+                if (data['response'] == 'success') {
+                    content.innerHTML = hashCode + "<br>" +
+                        '<input type="submit" onclick="generateTimetable(' + hashCode + ')" class="btn btn-primary" value="Generate" />';
+                } else {
+                    throw 'error';
+                }
+            })
+            .catch(a => content.innerHTML = "something went wrong");
+    };
+
+    function generateTimetable(hashCode) {
+        content.innerHTML = '<strong>Loading...</strong>';
+        modal.style.display = "block";
+        fetch(window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + "/api/timetable/generateTimetable?hashCode=" + hashCode)
+            .then(data => data.json())
+            .then(data => {
+                if (data['response'] == 'success') {
+                    content.innerHTML = '<nav aria-label="..."> <ul class="pagination"> <li class="page-item"> <button class="page-link" onclick="prevTimetable()" tabindex="-1"><<</button> </li> <li class="page-item disabled"> <button id="curTim" class="page-link">3/10</button> </li> <li class="page-item"> <button class="page-link" onclick="nextTimetable()">>></button> </li> </ul> </nav><div id="timCont"></div>';
+                    timetableData = data['data'];
+                    timetableCurrent = 1;
+                    prevTimetable();
+                    timetableDisplay = true;
+                } else {
+                    throw 'error';
+                }
+            })
+            .catch(a => content.innerHTML = "something went wrong");
+    }
+
+    function nextTimetable() {
+        if (timetableCurrent + 1 < timetableData.length && timetableCurrent + 1 >= 0) {
+            showTimetable(++timetableCurrent);
+        }
+    };
+
+    function prevTimetable() {
+        if (timetableCurrent - 1 < timetableData.length && timetableCurrent - 1 >= 0) {
+            showTimetable(--timetableCurrent);
+        }
+    };
+
+    function showTimetable(index) {
+        document.getElementById('curTim').innerHTML = (index + 1) + '/' + timetableData.length;
+        document.getElementById('timCont').innerHTML = JSON.stringify(timetableData[index]);
+    };
+
+    document.onkeydown = function(e) {
+        switch (e.keyCode) {
+            case 37:
+                if (timetableDisplay) {
+                    prevTimetable();
+                };
+                break;
+            case 39:
+                if (timetableDisplay) {
+                    nextTimetable();
+                };
+                break;
+        }
+    };
+
+    span2.onclick = function () {
+        timetableDisplay = false;
+        modal.style.display = "none";
+    }
+    /*window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }*/
+</script>
+
 <script>
     function addCondition(condition) {
         if (condition.type == 'noClassesAfter') {

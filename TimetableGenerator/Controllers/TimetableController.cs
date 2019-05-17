@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using TimetableGenerator.Models;
+using TimetableGenerator.Models.LocalModels;
 using TimetableGenerator.Services;
 
 namespace TimetableGenerator.Controllers
@@ -17,10 +19,12 @@ namespace TimetableGenerator.Controllers
     public class TimetableController : ControllerBase
     {
         private readonly TimetableConfigService _timetableConfigService;
+        private readonly TimetableGeneratorService _timetableGeneratorService;
 
-        public TimetableController(TimetableConfigService timetableConfigService)
+        public TimetableController(TimetableConfigService timetableConfigService, TimetableGeneratorService timetableGeneratorService)
         {
             _timetableConfigService = timetableConfigService;
+            _timetableGeneratorService = timetableGeneratorService;
         }
 
         [HttpPost("uploadCourses")]
@@ -42,6 +46,26 @@ namespace TimetableGenerator.Controllers
                 }
             }
             return StatusCode((int)HttpStatusCode.InternalServerError, new { response = "Something went wrong!" });
+        }
+
+        [HttpGet("getCourseData")]
+        public IActionResult GetCourseData([FromQuery] int hashCode)
+        {
+            TimetableData data = _timetableConfigService.GetTimetableDataByHashCode(User.Identity.Name, hashCode);
+            if (data != null) return Ok(new { response = "success", data = data });
+            return Ok(new { response = "not found" });
+        }
+
+        [HttpGet("generateTimetable")]
+        public IActionResult GenerateTimetable([FromQuery] int hashCode)
+        {
+            TimetableData data = _timetableConfigService.GetTimetableDataByHashCode(User.Identity.Name, hashCode);
+            if (data != null)
+            {
+                IEnumerable<Timetable> timetableList = _timetableGeneratorService.GenerateTimetableList(data, "");
+                return Ok(new { response = "success", data = timetableList });
+            }
+            return Ok(new { response = "not found" });
         }
     }
 }

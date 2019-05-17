@@ -52,6 +52,7 @@ namespace TimetableGenerator
             services.AddScoped<CryptographyService, CryptographyService>();
             services.AddScoped<TimetableConfigService, TimetableConfigService>();
             services.AddScoped<DatabaseService, DatabaseService>();
+            services.AddScoped<TimetableGeneratorService, TimetableGeneratorService>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }

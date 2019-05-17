@@ -48,6 +48,23 @@ namespace TimetableGenerator.Services
             return GetTimetableData(dbModelList);
         }
 
+        public TimetableData GetTimetableDataByHashCode(string name, int hashCode)
+        {
+            TimetableDataDbModel dbModel = _databaseService.GetTimetableDataByHashCode(name, hashCode);
+            if(dbModel != null)
+            {
+                return new TimetableData
+                {
+                    Owner = dbModel.Owner,
+                    SourceName = dbModel.SourceName,
+                    Time = dbModel.Time,
+                    HashCode = dbModel._id.GetHashCode(),
+                    CourseList = dbModel.CourseList
+                };
+            }
+            return null;
+        }
+
         private IEnumerable<TimetableData> GetTimetableData(IEnumerable<TimetableDataDbModel> timetableDataDbModel)
         {
             return timetableDataDbModel.Select(dbModel => new TimetableData
@@ -55,6 +72,7 @@ namespace TimetableGenerator.Services
                 Owner = dbModel.Owner,
                 SourceName = dbModel.SourceName,
                 Time = dbModel.Time,
+                HashCode = dbModel._id.GetHashCode(),
                 CourseList = dbModel.CourseList
             });
         }

@@ -49,6 +49,17 @@ namespace TimetableGenerator
             }
         }
 
+        public TimetableDataDbModel GetTimetableDataByHashCode(string name, int hashCode)
+        {
+            IEnumerable<TimetableDataDbModel> models = GetTimetableDataDbModels(name);
+            if(models != null)
+                foreach (TimetableDataDbModel model in models)
+                {
+                    if (model._id.GetHashCode() == hashCode) return model;
+                }
+            return null;
+        }
+
         public CreationStatus CreateCourseData(TimetableDataDbModel model)
         {
             try
