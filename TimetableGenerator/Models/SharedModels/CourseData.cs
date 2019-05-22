@@ -20,6 +20,8 @@ namespace TimetableGenerator.Models.SharedModels
 
     public class CourseDetails
     {
+        public string CourseName { get; set; }
+
         [JsonProperty("kod_grupy")]
         public string GroupCode { get; set; }
 

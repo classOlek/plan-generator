@@ -30,6 +30,7 @@ namespace TimetableGenerator.Services
                     if (returnList.Count() < ResultLimit)
                     {
                         List<CourseDetails> currentTimetable = prevTimetable.ToList();
+                        group.CourseName = courseData.CourseName;
                         currentTimetable.Add(group);
                         Rec(courseList.ToList(), currentTimetable, ref returnList);
                     }

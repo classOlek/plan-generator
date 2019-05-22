@@ -5,6 +5,7 @@
 
 <link rel="stylesheet" href="~/css/modal.css" />
 <link rel="stylesheet" href="~/css/simplePagination.css" />
+<link rel="stylesheet" href="~/css/timetable.css" />
 
 <script>
     var currentId = 1;
@@ -95,9 +96,135 @@
 </div>
 
 <div id="myModal" class="modal">
-    <div class="modal-content">
+    <div class="modal-content" style="width: 1050px;">
         <div id="closeModal" class="close2">&times;</div>
         <div id="actual-modal-content"><p>Some text in the Modal..</p></div>
+    </div>
+</div>
+
+<div id="timetableBase" style="display: none;">
+    <div id="schedule-wrap">
+        <div class="" id="schedule">
+            <div id="schedule-main">
+                <div id="days">
+                    <div>Monday</div>
+                    <div>Tuesday</div>
+                    <div>Wednesday</div>
+                    <div>Thursday</div>
+                    <div>Friday</div>
+                </div>
+                <div id="hours">
+                    <div>07:00</div>
+                    <div>08:00</div>
+                    <div>09:00</div>
+                    <div>10:00</div>
+                    <div>11:00</div>
+                    <div>12:00</div>
+                    <div>13:00</div>
+                    <div>14:00</div>
+                    <div>15:00</div>
+                    <div>16:00</div>
+                    <div>17:00</div>
+                    <div>18:00</div>
+                    <div>19:00</div>
+                    <div>20:00</div>
+                    <div>21:00</div>
+                </div>
+                <div class="day" id="dayMonday">
+                    <span class="sep"></span>
+                    <span class="sep"></span>
+                    <span class="sep"></span>
+                    <span class="sep"></span>
+                    <span class="sep"></span>
+                    <span class="sep"></span>
+                    <span class="sep"></span>
+                    <span class="sep"></span>
+                    <span class="sep"></span>
+                    <span class="sep"></span>
+                    <span class="sep"></span>
+                    <span class="sep"></span>
+                    <span class="sep"></span>
+                    <span class="sep"></span>
+                    <span class="sep"></span>
+                </div>
+                <div class="day" id="dayTuesday">
+                    <span class="sep"></span>
+                    <span class="sep"></span>
+                    <span class="sep"></span>
+                    <span class="sep"></span>
+                    <span class="sep"></span>
+                    <span class="sep"></span>
+                    <span class="sep"></span>
+                    <span class="sep"></span>
+                    <span class="sep"></span>
+                    <span class="sep"></span>
+                    <span class="sep"></span>
+                    <span class="sep"></span>
+                    <span class="sep"></span>
+                    <span class="sep"></span>
+                    <span class="sep"></span>
+                </div>
+                <div class="day" id="dayWednesday">
+                    <span class="sep"></span>
+                    <span class="sep"></span>
+                    <span class="sep"></span>
+                    <span class="sep"></span>
+                    <span class="sep"></span>
+                    <span class="sep"></span>
+                    <span class="sep"></span>
+                    <span class="sep"></span>
+                    <span class="sep"></span>
+                    <span class="sep"></span>
+                    <span class="sep"></span>
+                    <span class="sep"></span>
+                    <span class="sep"></span>
+                    <span class="sep"></span>
+                    <span class="sep"></span>
+                </div>
+                <div class="day" id="dayThursday">
+                    <span class="sep"></span>
+                    <span class="sep"></span>
+                    <span class="sep"></span>
+                    <span class="sep"></span>
+                    <span class="sep"></span>
+                    <span class="sep"></span>
+                    <span class="sep"></span>
+                    <span class="sep"></span>
+                    <span class="sep"></span>
+                    <span class="sep"></span>
+                    <span class="sep"></span>
+                    <span class="sep"></span>
+                    <span class="sep"></span>
+                    <span class="sep"></span>
+                    <span class="sep"></span>
+                </div>
+                <div class="day" id="dayFriday">
+                    <span class="sep"></span>
+                    <span class="sep"></span>
+                    <span class="sep"></span>
+                    <span class="sep"></span>
+                    <span class="sep"></span>
+                    <span class="sep"></span>
+                    <span class="sep"></span>
+                    <span class="sep"></span>
+                    <span class="sep"></span>
+                    <span class="sep"></span>
+                    <span class="sep"></span>
+                    <span class="sep"></span>
+                    <span class="sep"></span>
+                    <span class="sep"></span>
+                    <span class="sep"></span>
+                </div>
+            </div>
+        </div>
+        <div id="legend">
+            <span class="c_W">Wykład</span>
+            <span class="c_C">Ćwiczenia</span>
+            <span class="c_S">Seminarium</span>
+            <span class="c_L">Zajęcia laboratoryjne</span>
+            <span class="c_P">Projekt</span>
+            <span class="c_X">Inne</span>
+        </div>
     </div>
 </div>
 
@@ -106,6 +233,10 @@
     var btn = document.getElementById("myBtn");
     var span2 = document.getElementById("closeModal");
     var content = document.getElementById("actual-modal-content");
+    var timetableBase = document.getElementById("timetableBase");
+
+    var hoursFrom = 7;
+    var hoursTo = 21;
 
     var timetableData = null;
     var timetableCurrent = 0;
@@ -158,9 +289,110 @@
         }
     };
 
+    function generateEntry(entryData) {
+        var baseDatetime = new Date('1970-01-01T7:00:00Z');
+        var hourString = entryData['godzina'].split(" ")[1].split(",")[0];
+        var splitted = hourString.split("-");
+        var startHour = splitted[0];
+        var endHour = splitted[1];
+        var startDatetime = new Date('1970-01-01T' + startHour + ':00Z');
+        var endDatetime = new Date('1970-01-01T' + endHour + ':00Z');
+        var top = ((startDatetime.getTime() - baseDatetime.getTime()) / 60000 / 5) * 4;
+        var height = ((endDatetime.getTime() - startDatetime.getTime()) / 60000 / 5) * 4 - 4;
+        var building = "";
+        try {
+            building = entryData['godzina'].split("bud. ")[1].split(", ")[0];
+        } catch (e) {
+
+        }
+        var room = "";
+        try {
+            room = entryData['godzina'].split("sala ")[1];
+        } catch (e) {
+
+        }
+        var buildingString = `${building} / ${room}`;
+        var prowadzacy = entryData['prowadzacy'];
+        var stan = entryData['stan'];
+        var courseName = entryData['courseName'];
+
+        var week = entryData['godzina'].split(" ")[0];
+        var weekString = "";
+        var weekClass = "";
+        if (week.includes("TP")) {
+            var weekString = " | TP";
+            var weekClass = " w_2";
+        } else if (week.includes("TN")) {
+            var weekString = " | TN";
+            var weekClass = " w_1";
+        }
+
+        var typeString = "c_X";
+        if (entryData['typ'] == "Wykład") {
+            typeString = "c_W";
+        } else if (entryData['typ'] == "Ćwiczenia") {
+            typeString = "c_C";
+        } else if (entryData['typ'] == "Seminarium") {
+            typeString = "c_S";
+        } else if (entryData['typ'] == "Zajęcia laboratoryjne") {
+            typeString = "c_L";
+        } else if (entryData['typ'] == "Projekt") {
+            typeString = "c_P";
+        }
+
+        var entryDiv = document.createElement("div");
+        entryDiv.className = "entry";
+        entryDiv.style = `top: ${top}px; height: ${height}px`;
+        var insideDiv = document.createElement("div");
+        entryDiv.append(insideDiv);
+        insideDiv.className = `${typeString}${weekClass} wrap`;
+        var hDiv = document.createElement("div");
+        var nDiv = document.createElement("div");
+        var lDiv = document.createElement("div");
+        var pDiv = document.createElement("div");
+        var tDiv = document.createElement("div");
+        hDiv.className = "h";
+        nDiv.className = "n";
+        lDiv.className = "l";
+        pDiv.className = "p";
+        tDiv.className = "t";
+        hDiv.innerHTML = `${hourString}${weekString}`;
+        nDiv.innerHTML = courseName;
+        lDiv.innerHTML = buildingString;
+        pDiv.innerHTML = prowadzacy;
+        tDiv.innerHTML = stan;
+        insideDiv.append(hDiv);
+        insideDiv.append(nDiv);
+        insideDiv.append(lDiv);
+        insideDiv.append(pDiv);
+        insideDiv.append(tDiv);
+        return entryDiv;
+    }
+
     function showTimetable(index) {
         document.getElementById('curTim').innerHTML = (index + 1) + '/' + timetableData.length;
         document.getElementById('timCont').innerHTML = JSON.stringify(timetableData[index]);
+        document.getElementById('timCont').innerHTML = timetableBase.innerHTML;
+        var dayMonday = document.getElementById('dayMonday');
+        var dayTuesday = document.getElementById('dayTuesday');
+        var dayWednesday = document.getElementById('dayWednesday');
+        var dayThursday = document.getElementById('dayThursday');
+        var dayFriday = document.getElementById('dayFriday');
+        for (var i = 0; i < timetableData[index]['groupList'].length; i++) {
+            var data = timetableData[index]['groupList'][i];
+            var entry = generateEntry(data);
+            if (data['godzina'].includes("pn")) {
+                dayMonday.append(entry);
+            } else if (data['godzina'].includes("wt")) {
+                dayTuesday.append(entry);
+            } else if (data['godzina'].includes("śr")) {
+                dayWednesday.append(entry);
+            } else if (data['godzina'].includes("cz")) {
+                dayThursday.append(entry);
+            } else if (data['godzina'].includes("pt")) {
+                dayFriday.append(entry);
+            }
+        }
     };
 
     document.onkeydown = function(e) {
@@ -182,11 +414,6 @@
         timetableDisplay = false;
         modal.style.display = "none";
     }
-    /*window.onclick = function(event) {
-      if (event.target == modal) {
-        modal.style.display = "none";
-      }
-    }*/
 </script>
 
 <script>
