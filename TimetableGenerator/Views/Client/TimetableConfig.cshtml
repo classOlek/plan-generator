@@ -265,7 +265,7 @@
             .then(data => data.json())
             .then(data => {
                 if (data['response'] == 'success') {
-                    content.innerHTML = '<nav aria-label="..."> <ul class="pagination"> <li class="page-item"> <button class="page-link" onclick="prevTimetable()" tabindex="-1"><<</button> </li> <li class="page-item disabled"> <button id="curTim" class="page-link">3/10</button> </li> <li class="page-item"> <button class="page-link" onclick="nextTimetable()">>></button> </li> </ul> </nav><div id="timCont"></div>';
+                    content.innerHTML = '<nav aria-label="..."> <ul class="pagination"> <li class="page-item"> <button class="page-link" onclick="prevTimetable()" tabindex="-1"><<</button> </li> <li class="page-item disabled"> <button id="curTim" class="page-link">0/0</button> </li> <li class="page-item"> <button class="page-link" onclick="nextTimetable()">>></button> </li> </ul> </nav><div id="timCont"></div>';
                     timetableData = data['data'];
                     timetableCurrent = 1;
                     prevTimetable();
@@ -373,6 +373,7 @@
         document.getElementById('curTim').innerHTML = (index + 1) + '/' + timetableData.length;
         document.getElementById('timCont').innerHTML = JSON.stringify(timetableData[index]);
         document.getElementById('timCont').innerHTML = timetableBase.innerHTML;
+        console.log(timetableData[index]['groupList']);
         var dayMonday = document.getElementById('dayMonday');
         var dayTuesday = document.getElementById('dayTuesday');
         var dayWednesday = document.getElementById('dayWednesday');
