@@ -1,0 +1,696 @@
+[{
+		"kod_kursu": "INZ003562L",
+		"nazwa_kursu": "Rozproszone sys. informatyczne",
+		"dane": [{
+				"kod_grupy": "Z00-31u",
+				"stan": "16/16",
+				"prowadzacy": "Dr in\u017c. Zbigniew Fry\u017alewicz",
+				"typ": "Zaj\u0119cia laboratoryjne",
+				"godzina": "pn/TN+1/2 07:30-09:00, bud. C-6, sala 129"
+			}, {
+				"kod_grupy": "Z00-31aa",
+				"stan": "17/16",
+				"prowadzacy": "Dr in\u017c. Zbigniew Fry\u017alewicz",
+				"typ": "Zaj\u0119cia laboratoryjne",
+				"godzina": "pn/TN+1/2 09:15-11:00, bud. C-6, sala 129"
+			}, {
+				"kod_grupy": "Z00-31v",
+				"stan": "16/16",
+				"prowadzacy": "Dr in\u017c. Zbigniew Fry\u017alewicz",
+				"typ": "Zaj\u0119cia laboratoryjne",
+				"godzina": "pn/TP+1/2 07:30-09:00, bud. C-6, sala 129"
+			}, {
+				"kod_grupy": "Z00-31ab",
+				"stan": "17/16",
+				"prowadzacy": "Dr in\u017c. Zbigniew Fry\u017alewicz",
+				"typ": "Zaj\u0119cia laboratoryjne",
+				"godzina": "pn/TP+1/2 09:15-11:00, bud. C-6, sala 129"
+			}, {
+				"kod_grupy": "Z00-31w",
+				"stan": "16/16",
+				"prowadzacy": "Dr in\u017c. Zbigniew Fry\u017alewicz",
+				"typ": "Zaj\u0119cia laboratoryjne",
+				"godzina": "wt/TN+1/2 07:30-09:00, bud. C-6, sala 129"
+			}, {
+				"kod_grupy": "Z00-31x",
+				"stan": "17/16",
+				"prowadzacy": "Dr in\u017c. Zbigniew Fry\u017alewicz",
+				"typ": "Zaj\u0119cia laboratoryjne",
+				"godzina": "wt/TP+1/2 07:30-09:00, bud. C-6, sala 129"
+			}, {
+				"kod_grupy": "Z00-31q",
+				"stan": "16/16",
+				"prowadzacy": "Mgr in\u017c. Roman Bartusiak",
+				"typ": "Zaj\u0119cia laboratoryjne",
+				"godzina": "pt/TN+1/2 09:15-11:00, bud. C-6, sala 129"
+			}, {
+				"kod_grupy": "Z00-31s",
+				"stan": "16/16",
+				"prowadzacy": "Dr in\u017c. Mariusz Fra\u015b",
+				"typ": "Zaj\u0119cia laboratoryjne",
+				"godzina": "pt/TN+1/2 11:15-13:00, bud. C-6, sala 129"
+			}, {
+				"kod_grupy": "Z00-31ae",
+				"stan": "16/16",
+				"prowadzacy": "Mgr Pawe\u0142 Krzos",
+				"typ": "Zaj\u0119cia laboratoryjne",
+				"godzina": "pt/TN+1/2 13:15-15:00, bud. C-6, sala 129"
+			}, {
+				"kod_grupy": "Z00-31y",
+				"stan": "16/16",
+				"prowadzacy": "Mgr Pawe\u0142 Krzos",
+				"typ": "Zaj\u0119cia laboratoryjne",
+				"godzina": "pt/TN+1/2 15:15-16:55, bud. C-6, sala 129"
+			}, {
+				"kod_grupy": "Z00-31r",
+				"stan": "16/16",
+				"prowadzacy": "Mgr in\u017c. Roman Bartusiak",
+				"typ": "Zaj\u0119cia laboratoryjne",
+				"godzina": "pt/TP+1/2 09:15-11:00, bud. C-6, sala 129"
+			}, {
+				"kod_grupy": "Z00-31t",
+				"stan": "16/16",
+				"prowadzacy": "Mgr Pawe\u0142 Krzos",
+				"typ": "Zaj\u0119cia laboratoryjne",
+				"godzina": "pt/TP+1/2 11:15-13:00, bud. C-6, sala 129"
+			}, {
+				"kod_grupy": "Z00-31p",
+				"stan": "16/16",
+				"prowadzacy": "Mgr Pawe\u0142 Krzos",
+				"typ": "Zaj\u0119cia laboratoryjne",
+				"godzina": "pt/TP+1/2 13:15-15:00, bud. C-6, sala 129"
+			}, {
+				"kod_grupy": "Z00-31z",
+				"stan": "16/16",
+				"prowadzacy": "Mgr Pawe\u0142 Krzos",
+				"typ": "Zaj\u0119cia laboratoryjne",
+				"godzina": "pt/TP+1/2 15:15-16:55, bud. C-6, sala 129"
+			}
+		]
+	}, {
+		"kod_kursu": "INZ003562W",
+		"nazwa_kursu": "Rozproszone sys. informatyczne",
+		"dane": [{
+				"kod_grupy": "Z00-32a",
+				"stan": "121/116",
+				"prowadzacy": "Dr in\u017c. Mariusz Fra\u015b",
+				"typ": "Wyk\u0142ad",
+				"godzina": "wt 13:15-15:00, bud. A-1, sala 329"
+			}, {
+				"kod_grupy": "Z00-32b",
+				"stan": "110/116",
+				"prowadzacy": "Dr in\u017c. Mariusz Fra\u015b",
+				"typ": "Wyk\u0142ad",
+				"godzina": "pt 09:15-11:00, bud. A-1, sala 329"
+			}
+		]
+	}, {
+		"kod_kursu": "INZ003563L",
+		"nazwa_kursu": "Bezpiecze\u0144stwo i ochr. danych",
+		"dane": [{
+				"kod_grupy": "Z00-33y",
+				"stan": "17/16",
+				"prowadzacy": "Dr in\u017c. Jacek Gruber",
+				"typ": "Zaj\u0119cia laboratoryjne",
+				"godzina": "wt/TN+1/2 15:15-16:55, bud. D-2, sala 127b"
+			}, {
+				"kod_grupy": "Z00-33aa",
+				"stan": "17/16",
+				"prowadzacy": "Dr in\u017c. Jacek Gruber",
+				"typ": "Zaj\u0119cia laboratoryjne",
+				"godzina": "wt/TN+1/2 17:05-18:45, bud. D-2, sala 127b"
+			}, {
+				"kod_grupy": "Z00-33w",
+				"stan": "19/16",
+				"prowadzacy": "Dr in\u017c. Jacek Gruber",
+				"typ": "Zaj\u0119cia laboratoryjne",
+				"godzina": "wt/TN+1/2 18:55-20:35, bud. D-2, sala 127b"
+			}, {
+				"kod_grupy": "Z00-33z",
+				"stan": "18/16",
+				"prowadzacy": "Dr in\u017c. Jacek Gruber",
+				"typ": "Zaj\u0119cia laboratoryjne",
+				"godzina": "wt/TP+1/2 15:15-16:55, bud. D-2, sala 127b"
+			}, {
+				"kod_grupy": "Z00-33ab",
+				"stan": "17/16",
+				"prowadzacy": "Dr in\u017c. Jacek Gruber",
+				"typ": "Zaj\u0119cia laboratoryjne",
+				"godzina": "wt/TP+1/2 17:05-18:45, bud. D-2, sala 127b"
+			}, {
+				"kod_grupy": "Z00-33x",
+				"stan": "17/17",
+				"prowadzacy": "Dr in\u017c. Jacek Gruber",
+				"typ": "Zaj\u0119cia laboratoryjne",
+				"godzina": "wt/TP+1/2 18:55-20:35, bud. D-2, sala 127b"
+			}, {
+				"kod_grupy": "Z00-33ae",
+				"stan": "15/16",
+				"prowadzacy": "Dr in\u017c. Teresa Mendyk-Krajewska",
+				"typ": "Zaj\u0119cia laboratoryjne",
+				"godzina": "cz/TN+1/2 15:15-16:55, bud. D-2, sala 107b"
+			}, {
+				"kod_grupy": "Z00-33ac",
+				"stan": "14/16",
+				"prowadzacy": "Dr in\u017c. Teresa Mendyk-Krajewska",
+				"typ": "Zaj\u0119cia laboratoryjne",
+				"godzina": "cz/TN+1/2 17:05-18:45, bud. D-2, sala 107b"
+			}, {
+				"kod_grupy": "Z00-33p",
+				"stan": "16/16",
+				"prowadzacy": "Dr in\u017c. Teresa Mendyk-Krajewska",
+				"typ": "Zaj\u0119cia laboratoryjne",
+				"godzina": "cz/TP+1/2 15:15-16:55, bud. D-2, sala 107b"
+			}, {
+				"kod_grupy": "Z00-33ad",
+				"stan": "11/16",
+				"prowadzacy": "Dr in\u017c. Teresa Mendyk-Krajewska",
+				"typ": "Zaj\u0119cia laboratoryjne",
+				"godzina": "cz/TP+1/2 17:05-18:45, bud. D-2, sala 107b"
+			}, {
+				"kod_grupy": "Z00-33q",
+				"stan": "16/16",
+				"prowadzacy": "Mgr in\u017c. Piotr Bienias",
+				"typ": "Zaj\u0119cia laboratoryjne",
+				"godzina": "pt/TN+1/2 13:15-15:00, bud. D-2, sala 127c"
+			}, {
+				"kod_grupy": "Z00-33s",
+				"stan": "18/16",
+				"prowadzacy": "Mgr in\u017c. Arkadiusz Warzy\u0144ski",
+				"typ": "Zaj\u0119cia laboratoryjne",
+				"godzina": "pt/TN+1/2 15:15-16:55, bud. D-2, sala 127c"
+			}, {
+				"kod_grupy": "Z00-33r",
+				"stan": "16/16",
+				"prowadzacy": "Mgr in\u017c. Piotr Bienias",
+				"typ": "Zaj\u0119cia laboratoryjne",
+				"godzina": "pt/TP+1/2 13:15-15:00, bud. D-2, sala 127c"
+			}, {
+				"kod_grupy": "Z00-33t",
+				"stan": "17/16",
+				"prowadzacy": "Mgr in\u017c. Arkadiusz Warzy\u0144ski",
+				"typ": "Zaj\u0119cia laboratoryjne",
+				"godzina": "pt/TP+1/2 15:15-16:55, bud. D-2, sala 127c"
+			}
+		]
+	}, {
+		"kod_kursu": "INZ003563W",
+		"nazwa_kursu": "Bezpiecze\u0144stwo i ochr. danych",
+		"dane": [{
+				"kod_grupy": "Z00-34b",
+				"stan": "115/116",
+				"prowadzacy": "Dr hab. in\u017c. Grzegorz Ko\u0142aczek",
+				"typ": "Wyk\u0142ad",
+				"godzina": "wt 09:15-11:00, bud. A-1, sala 329"
+			}, {
+				"kod_grupy": "Z00-34a",
+				"stan": "109/116",
+				"prowadzacy": "Dr hab. in\u017c. Grzegorz Ko\u0142aczek",
+				"typ": "Wyk\u0142ad",
+				"godzina": "\u015br 15:15-16:55, bud. D-1, sala 29"
+			}
+		]
+	}, {
+		"kod_kursu": "INZ003564L",
+		"nazwa_kursu": "Hurtownie danych",
+		"dane": [{
+				"kod_grupy": "Z00-35a",
+				"stan": "16/16",
+				"prowadzacy": "Mgr in\u017c. Krystian Wojtkiewicz",
+				"typ": "Zaj\u0119cia laboratoryjne",
+				"godzina": "pn 11:15-13:00, bud. D-2, sala 127c"
+			}, {
+				"kod_grupy": "Z00-35b",
+				"stan": "15/15",
+				"prowadzacy": "Mgr in\u017c. Krystian Wojtkiewicz",
+				"typ": "Zaj\u0119cia laboratoryjne",
+				"godzina": "pn 13:15-15:00, bud. B-4, sala 440"
+			}, {
+				"kod_grupy": "Z00-35i",
+				"stan": "16/16",
+				"prowadzacy": "Mgr in\u017c. Krystian Wojtkiewicz",
+				"typ": "Zaj\u0119cia laboratoryjne",
+				"godzina": "pn 15:15-16:55, bud. D-2, sala 127c"
+			}, {
+				"kod_grupy": "Z00-35af",
+				"stan": "16/16",
+				"prowadzacy": "Dr in\u017c. Bernadetta Maleszka",
+				"typ": "Zaj\u0119cia laboratoryjne",
+				"godzina": "\u015br 07:30-09:00, bud. D-2, sala 127c"
+			}, {
+				"kod_grupy": "Z00-35k",
+				"stan": "15/15",
+				"prowadzacy": "Dr in\u017c. Bernadetta Maleszka",
+				"typ": "Zaj\u0119cia laboratoryjne",
+				"godzina": "\u015br 15:15-16:55, bud. B-1, sala 410"
+			}, {
+				"kod_grupy": "Z00-35c",
+				"stan": "15/15",
+				"prowadzacy": "Mgr in\u017c. Krystian Wojtkiewicz",
+				"typ": "Zaj\u0119cia laboratoryjne",
+				"godzina": "\u015br 17:05-18:45, bud. B-4, sala 441"
+			}, {
+				"kod_grupy": "Z00-35d",
+				"stan": "15/15",
+				"prowadzacy": "Mgr in\u017c. Krystian Wojtkiewicz",
+				"typ": "Zaj\u0119cia laboratoryjne",
+				"godzina": "\u015br 18:55-20:35, bud. B-4, sala 441"
+			}, {
+				"kod_grupy": "Z00-35m",
+				"stan": "15/15",
+				"prowadzacy": "Mgr in\u017c. Mateusz Sitarczyk",
+				"typ": "Zaj\u0119cia laboratoryjne",
+				"godzina": "\u015br 18:55-20:35, bud. B-1, sala 410"
+			}, {
+				"kod_grupy": "Z00-35h",
+				"stan": "15/15",
+				"prowadzacy": "Dr in\u017c. Lech Tuzinkiewicz",
+				"typ": "Zaj\u0119cia laboratoryjne",
+				"godzina": "cz 07:30-09:00, bud. A-1, sala 248"
+			}, {
+				"kod_grupy": "Z00-35g",
+				"stan": "15/15",
+				"prowadzacy": "Dr in\u017c. Lech Tuzinkiewicz",
+				"typ": "Zaj\u0119cia laboratoryjne",
+				"godzina": "cz 11:15-13:00, bud. A-1, sala 248"
+			}, {
+				"kod_grupy": "Z00-35j",
+				"stan": "16/16",
+				"prowadzacy": "Dr in\u017c. Lech Tuzinkiewicz",
+				"typ": "Zaj\u0119cia laboratoryjne",
+				"godzina": "pt 07:30-09:00, bud. D-2, sala 127a"
+			}, {
+				"kod_grupy": "Z00-35n",
+				"stan": "16/16",
+				"prowadzacy": "Dr in\u017c. Lech Tuzinkiewicz",
+				"typ": "Zaj\u0119cia laboratoryjne",
+				"godzina": "pt 11:15-13:00, bud. D-2, sala 127a"
+			}, {
+				"kod_grupy": "Z00-35e",
+				"stan": "16/16",
+				"prowadzacy": "Dr in\u017c. Lech Tuzinkiewicz",
+				"typ": "Zaj\u0119cia laboratoryjne",
+				"godzina": "pt 13:15-15:00, bud. D-2, sala 107b"
+			}, {
+				"kod_grupy": "Z00-35o",
+				"stan": "16/16",
+				"prowadzacy": "Dr in\u017c. Lech Tuzinkiewicz",
+				"typ": "Zaj\u0119cia laboratoryjne",
+				"godzina": "pt 15:15-16:55, bud. D-2, sala 107b"
+			}, {
+				"kod_grupy": "Z00-35f",
+				"stan": "16/16",
+				"prowadzacy": "Dr in\u017c. Lech Tuzinkiewicz",
+				"typ": "Zaj\u0119cia laboratoryjne",
+				"godzina": "pt 17:05-18:45, bud. D-2, sala 107b"
+			}
+		]
+	}, {
+		"kod_kursu": "INZ003564W",
+		"nazwa_kursu": "Hurtownie danych",
+		"dane": [{
+				"kod_grupy": "Z00-36a",
+				"stan": "115/116",
+				"prowadzacy": "Dr in\u017c. Bernadetta Maleszka",
+				"typ": "Wyk\u0142ad",
+				"godzina": "\u015br/TN+1/2 13:15-15:00, bud. B-4, sala 409"
+			}, {
+				"kod_grupy": "Z00-36b",
+				"stan": "116/116",
+				"prowadzacy": "Dr in\u017c. Bernadetta Maleszka",
+				"typ": "Wyk\u0142ad",
+				"godzina": "\u015br/TP+1/2 13:15-15:00, bud. B-4, sala 409"
+			}
+		]
+	}, {
+		"kod_kursu": "INZ003565L",
+		"nazwa_kursu": "Sztuczna intelig. i in\u017c.wiedzy",
+		"dane": [{
+				"kod_grupy": "Z00-37n",
+				"stan": "16/15",
+				"prowadzacy": "Mgr in\u017c. Jan Jakubik",
+				"typ": "Zaj\u0119cia laboratoryjne",
+				"godzina": "pn 13:15-15:00, bud. B-4, sala 441"
+			}, {
+				"kod_grupy": "Z00-37d",
+				"stan": "15/15",
+				"prowadzacy": "Mgr in\u017c. Artur Zawisza",
+				"typ": "Zaj\u0119cia laboratoryjne",
+				"godzina": "pn 15:15-16:55, bud. B-4, sala 442"
+			}, {
+				"kod_grupy": "Z00-37h",
+				"stan": "15/15",
+				"prowadzacy": "Mgr in\u017c. Artur Zawisza",
+				"typ": "Zaj\u0119cia laboratoryjne",
+				"godzina": "pn 18:55-20:35, bud. B-4, sala 442"
+			}, {
+				"kod_grupy": "Z00-37o",
+				"stan": "16/15",
+				"prowadzacy": "Mgr in\u017c. Waldemar Szostak",
+				"typ": "Zaj\u0119cia laboratoryjne",
+				"godzina": "\u015br 17:05-18:45, bud. B-4, sala 440"
+			}, {
+				"kod_grupy": "Z00-37af",
+				"stan": "16/16",
+				"prowadzacy": "Mgr in\u017c. Arkadiusz Janz",
+				"typ": "Zaj\u0119cia laboratoryjne",
+				"godzina": "\u015br 18:55-20:35, bud. B-4, sala 440"
+			}, {
+				"kod_grupy": "Z00-37c",
+				"stan": "15/15",
+				"prowadzacy": "Dr in\u017c. Jacek Gruber",
+				"typ": "Zaj\u0119cia laboratoryjne",
+				"godzina": "cz 13:15-15:00, bud. B-4, sala 440"
+			}, {
+				"kod_grupy": "Z00-37e",
+				"stan": "15/15",
+				"prowadzacy": "Dr in\u017c. Jacek Gruber",
+				"typ": "Zaj\u0119cia laboratoryjne",
+				"godzina": "cz 17:05-18:45, bud. B-4, sala 441"
+			}, {
+				"kod_grupy": "Z00-37m",
+				"stan": "15/15",
+				"prowadzacy": "Dr in\u017c. Jacek Gruber",
+				"typ": "Zaj\u0119cia laboratoryjne",
+				"godzina": "cz 18:55-20:35, bud. B-4, sala 441"
+			}, {
+				"kod_grupy": "Z00-37a",
+				"stan": "15/15",
+				"prowadzacy": "Mgr in\u017c. Artur Zawisza",
+				"typ": "Zaj\u0119cia laboratoryjne",
+				"godzina": "pt 07:30-09:00, bud. B-4, sala 443"
+			}, {
+				"kod_grupy": "Z00-37b",
+				"stan": "15/15",
+				"prowadzacy": "Mgr in\u017c. Artur Zawisza",
+				"typ": "Zaj\u0119cia laboratoryjne",
+				"godzina": "pt 09:15-11:00, bud. B-4, sala 441"
+			}, {
+				"kod_grupy": "Z00-37f",
+				"stan": "15/15",
+				"prowadzacy": "Mgr in\u017c. Wiktor Walentynowicz",
+				"typ": "Zaj\u0119cia laboratoryjne",
+				"godzina": "pt 13:15-15:00, bud. B-4, sala 444"
+			}, {
+				"kod_grupy": "Z00-37g",
+				"stan": "15/15",
+				"prowadzacy": "Dr in\u017c. Pawe\u0142 Myszkowski",
+				"typ": "Zaj\u0119cia laboratoryjne",
+				"godzina": "pt 13:15-15:00, bud. B-4, sala 443"
+			}, {
+				"kod_grupy": "Z00-37j",
+				"stan": "15/15",
+				"prowadzacy": "Dr in\u017c. Pawe\u0142 Myszkowski",
+				"typ": "Zaj\u0119cia laboratoryjne",
+				"godzina": "pt 15:15-16:55, bud. B-4, sala 443"
+			}, {
+				"kod_grupy": "Z00-37k",
+				"stan": "16/15",
+				"prowadzacy": "Mgr in\u017c. Wiktor Walentynowicz",
+				"typ": "Zaj\u0119cia laboratoryjne",
+				"godzina": "pt 15:15-16:55, bud. B-4, sala 444"
+			}, {
+				"kod_grupy": "Z00-37i",
+				"stan": "15/15",
+				"prowadzacy": "Dr in\u017c. Pawe\u0142 Myszkowski",
+				"typ": "Zaj\u0119cia laboratoryjne",
+				"godzina": "pt 17:05-18:45, bud. B-4, sala 443"
+			}, {
+				"kod_grupy": "Z00-37l",
+				"stan": "15/15",
+				"prowadzacy": "Mgr in\u017c. Wiktor Walentynowicz",
+				"typ": "Zaj\u0119cia laboratoryjne",
+				"godzina": "pt 17:05-18:45, bud. B-4, sala 444"
+			}
+		]
+	}, {
+		"kod_kursu": "INZ003565W",
+		"nazwa_kursu": "Sztuczna intelig. i in\u017c.wiedzy",
+		"dane": [{
+				"kod_grupy": "Z00-38a",
+				"stan": "114/116",
+				"prowadzacy": "Prof. dr hab. in\u017c. Halina Kwa\u015bnicka",
+				"typ": "Wyk\u0142ad",
+				"godzina": "wt 15:15-16:55, bud. A-1, sala 329"
+			}, {
+				"kod_grupy": "Z00-38b",
+				"stan": "120/116",
+				"prowadzacy": "Prof. dr hab. in\u017c. Halina Kwa\u015bnicka",
+				"typ": "Wyk\u0142ad",
+				"godzina": "cz 11:15-13:00, bud. C-13, sala 1.30"
+			}
+		]
+	}, {
+		"kod_kursu": "INZ005210S",
+		"nazwa_kursu": "Proseminarium in\u017cynierskie",
+		"dane": [{
+				"kod_grupy": "Z00-39h",
+				"stan": "20/18",
+				"prowadzacy": "Dr hab. in\u017c. Ireneusz J\u00f3\u017awiak",
+				"typ": "Seminarium",
+				"godzina": "pn 13:15-15:00, bud. B-4, sala 447"
+			}, {
+				"kod_grupy": "Z00-39a",
+				"stan": "19/18",
+				"prowadzacy": "Dr hab. in\u017c. Ireneusz J\u00f3\u017awiak",
+				"typ": "Seminarium",
+				"godzina": "pn 15:15-16:55, bud. B-4, sala 447"
+			}, {
+				"kod_grupy": "Z00-39i",
+				"stan": "16/18",
+				"prowadzacy": "Prof. dr hab. in\u017c. Jerzy J\u00f3zefczyk",
+				"typ": "Seminarium",
+				"godzina": "wt 15:15-16:55, bud. C-3, sala 118"
+			}, {
+				"kod_grupy": "Z00-39j",
+				"stan": "18/18",
+				"prowadzacy": "Dr hab. in\u017c. Bogdan Trawi\u0144ski",
+				"typ": "Seminarium",
+				"godzina": "wt 15:15-16:55, bud. D-2, sala 201-20"
+			}, {
+				"kod_grupy": "Z00-39g",
+				"stan": "19/18",
+				"prowadzacy": "Dr hab. in\u017c. Bogdan Trawi\u0144ski",
+				"typ": "Seminarium",
+				"godzina": "wt 17:05-18:45, bud. C-3, sala 118"
+			}, {
+				"kod_grupy": "Z00-39l",
+				"stan": "17/18",
+				"prowadzacy": "Dr hab. in\u017c. Leszek Borzemski",
+				"typ": "Seminarium",
+				"godzina": "\u015br 15:15-16:55, bud. B-4, sala 433"
+			}, {
+				"kod_grupy": "Z00-39m",
+				"stan": "18/18",
+				"prowadzacy": "Prof. dr hab. in\u017c. Jerzy J\u00f3zefczyk",
+				"typ": "Seminarium",
+				"godzina": "\u015br 15:15-16:55, bud. C-3, sala 118"
+			}, {
+				"kod_grupy": "Z00-39d",
+				"stan": "18/18",
+				"prowadzacy": "Dr hab. in\u017c. Urszula Markowska-Kaczmar",
+				"typ": "Seminarium",
+				"godzina": "\u015br 17:05-18:45, bud. D-2, sala 201-20"
+			}, {
+				"kod_grupy": "Z00-39n",
+				"stan": "18/18",
+				"prowadzacy": "Prof. dr hab. in\u017c. Zbigniew Huzar",
+				"typ": "Seminarium",
+				"godzina": "cz 11:15-13:00, bud. D-2, sala 201-20"
+			}, {
+				"kod_grupy": "Z00-39f",
+				"stan": "21/18",
+				"prowadzacy": "Dr hab. in\u017c. Ireneusz J\u00f3\u017awiak",
+				"typ": "Seminarium",
+				"godzina": "cz 13:15-15:00, bud. B-4, sala 433"
+			}, {
+				"kod_grupy": "Z00-39k",
+				"stan": "19/18",
+				"prowadzacy": "Dr hab. in\u017c. Bogdan Trawi\u0144ski",
+				"typ": "Seminarium",
+				"godzina": "cz 13:15-15:00, bud. D-2, sala 201-20"
+			}, {
+				"kod_grupy": "Z00-39e",
+				"stan": "19/18",
+				"prowadzacy": "Dr hab. in\u017c. Bogdan Trawi\u0144ski",
+				"typ": "Seminarium",
+				"godzina": "cz 15:15-16:55, bud. B-4, sala 433"
+			}
+		]
+	}, {
+		"kod_kursu": "INZ005211P",
+		"nazwa_kursu": "Zespo\u0142owe przedsi\u0119wzi\u0119cie in\u017c.",
+		"dane": [{
+				"kod_grupy": "Z00-40a",
+				"stan": "17/16",
+				"prowadzacy": "Dr in\u017c. Krzysztof Wa\u015bko",
+				"typ": "Projekt",
+				"godzina": "pn 07:30-11:00, bud. C-6, sala 130"
+			}, {
+				"kod_grupy": "Z00-40g",
+				"stan": "16/16",
+				"prowadzacy": "Dr in\u017c. Jolanta Wrzuszczak-Noga",
+				"typ": "Projekt",
+				"godzina": "pn 09:15-13:00, bud. D-2, sala 107b"
+			}, {
+				"kod_grupy": "Z00-40b",
+				"stan": "16/16",
+				"prowadzacy": "Dr in\u017c. Ziemowit Nowak",
+				"typ": "Projekt",
+				"godzina": "pn 11:15-15:00, bud. C-6, sala 130"
+			}, {
+				"kod_grupy": "Z00-40e",
+				"stan": "16/16",
+				"prowadzacy": "Dr in\u017c. Zbigniew Szpunar",
+				"typ": "Projekt",
+				"godzina": "pn 17:05-20:35, bud. D-2, sala 107a"
+			}, {
+				"kod_grupy": "Z00-40r",
+				"stan": "16/16",
+				"prowadzacy": "Dr in\u017c. Zbigniew Telec",
+				"typ": "Projekt",
+				"godzina": "wt 07:30-11:00, bud. B-4, sala 441"
+			}, {
+				"kod_grupy": "Z00-40l",
+				"stan": "16/16",
+				"prowadzacy": "Dr in\u017c. Martin Tabakow",
+				"typ": "Projekt",
+				"godzina": "wt 09:15-13:00, bud. B-4, sala 440"
+			}, {
+				"kod_grupy": "Z00-40q",
+				"stan": "15/16",
+				"prowadzacy": "Mgr Hanna Mazur",
+				"typ": "Projekt",
+				"godzina": "wt 17:05-20:35, bud. D-2, sala 107b"
+			}, {
+				"kod_grupy": "Z00-40m",
+				"stan": "16/16",
+				"prowadzacy": "Dr in\u017c. Dariusz G\u0105sior",
+				"typ": "Projekt",
+				"godzina": "\u015br 07:30-11:00, bud. D-2, sala 127b"
+			}, {
+				"kod_grupy": "Z00-40h",
+				"stan": "13/16",
+				"prowadzacy": "Dr hab. in\u017c. Dariusz Kr\u00f3l",
+				"typ": "Projekt",
+				"godzina": "\u015br 15:15-18:45, bud. D-2, sala 107a"
+			}, {
+				"kod_grupy": "Z00-40i",
+				"stan": "9/16",
+				"prowadzacy": "Dr in\u017c. Grzegorz Filcek",
+				"typ": "Projekt",
+				"godzina": "\u015br 17:05-20:35, bud. D-2, sala 127b"
+			}, {
+				"kod_grupy": "Z00-40j",
+				"stan": "16/16",
+				"prowadzacy": "Dr in\u017c. Micha\u0142 K\u0119dziora",
+				"typ": "Projekt",
+				"godzina": "cz 15:15-18:45, bud. D-2, sala 127b"
+			}, {
+				"kod_grupy": "Z00-40c",
+				"stan": "19/16",
+				"prowadzacy": "Dr in\u017c. Wojciech Thomas",
+				"typ": "Projekt",
+				"godzina": "pt 07:30-11:00, bud. D-2, sala 107a"
+			}, {
+				"kod_grupy": "Z00-40n",
+				"stan": "16/16",
+				"prowadzacy": "Dr in\u017c. Marek Kopel",
+				"typ": "Projekt",
+				"godzina": "pt 09:15-13:00, bud. A-1, sala 248"
+			}, {
+				"kod_grupy": "Z00-40k",
+				"stan": "16/16",
+				"prowadzacy": "Dr in\u017c. Grzegorz Popek",
+				"typ": "Projekt",
+				"godzina": "pt 11:15-15:00, bud. D-2, sala 107a"
+			}
+		]
+	}, {
+		"kod_kursu": "INZ005213L",
+		"nazwa_kursu": "Zaaw. technologie webowe",
+		"dane": [{
+				"kod_grupy": "Z02-00f",
+				"stan": "15/16",
+				"prowadzacy": "Mgr in\u017c. Piotr J\u00f3\u017awiak",
+				"typ": "Zaj\u0119cia laboratoryjne",
+				"godzina": "pn 17:05-18:45, bud. D-2, sala 107b"
+			}, {
+				"kod_grupy": "Z02-00g",
+				"stan": "16/16",
+				"prowadzacy": "Dr in\u017c. Rafa\u0142 Kern",
+				"typ": "Zaj\u0119cia laboratoryjne",
+				"godzina": "pn 18:55-20:35, bud. D-2, sala 107b"
+			}, {
+				"kod_grupy": "Z02-00b",
+				"stan": "16/16",
+				"prowadzacy": "Mgr in\u017c. Marek So\u015bnicki",
+				"typ": "Zaj\u0119cia laboratoryjne",
+				"godzina": "wt 18:55-20:35, bud. D-2, sala 127c"
+			}, {
+				"kod_grupy": "Z02-00c",
+				"stan": "12/16",
+				"prowadzacy": "Mgr in\u017c. Marek So\u015bnicki",
+				"typ": "Zaj\u0119cia laboratoryjne",
+				"godzina": "pt 07:30-09:00, bud. D-2, sala 107b"
+			}, {
+				"kod_grupy": "Z02-00e",
+				"stan": "16/16",
+				"prowadzacy": "Mgr in\u017c. Marek So\u015bnicki",
+				"typ": "Zaj\u0119cia laboratoryjne",
+				"godzina": "pt 11:15-13:00, bud. D-2, sala 107b"
+			}
+		]
+	}, {
+		"kod_kursu": "INZ005213W",
+		"nazwa_kursu": "Zaaw. technologie webowe",
+		"dane": [{
+				"kod_grupy": "Z02-01b",
+				"stan": "77/96",
+				"prowadzacy": "Dr in\u017c. Ziemowit Nowak",
+				"typ": "Wyk\u0142ad",
+				"godzina": "pn/TP+1/2 15:15-16:55, bud. B-4, sala 409"
+			}
+		]
+	}, {
+		"kod_kursu": "INZ005233L",
+		"nazwa_kursu": "Administrowanie syst Microsoft",
+		"dane": [{
+				"kod_grupy": "Z03-88d",
+				"stan": "16/16",
+				"prowadzacy": "Dr in\u017c. Wojciech Thomas",
+				"typ": "Zaj\u0119cia laboratoryjne",
+				"godzina": "\u015br 09:15-11:00, bud. D-2, sala 333b"
+			}, {
+				"kod_grupy": "Z03-88b",
+				"stan": "16/16",
+				"prowadzacy": "Dr in\u017c. Wojciech Thomas",
+				"typ": "Zaj\u0119cia laboratoryjne",
+				"godzina": "\u015br 11:15-13:00, bud. D-2, sala 333b"
+			}, {
+				"kod_grupy": "Z03-88e",
+				"stan": "14/16",
+				"prowadzacy": "Mgr in\u017c. Krzysztof St\u0119pniak",
+				"typ": "Zaj\u0119cia laboratoryjne",
+				"godzina": "pt 11:15-13:00, bud. D-2, sala 333b"
+			}, {
+				"kod_grupy": "Z03-88f",
+				"stan": "13/16",
+				"prowadzacy": "Mgr in\u017c. Krzysztof St\u0119pniak",
+				"typ": "Zaj\u0119cia laboratoryjne",
+				"godzina": "pt 13:15-15:00, bud. D-2, sala 333b"
+			}
+		]
+	}, {
+		"kod_kursu": "INZ005233W",
+		"nazwa_kursu": "Administrowanie syst Microsoft",
+		"dane": [{
+				"kod_grupy": "Z03-89a",
+				"stan": "65/96",
+				"prowadzacy": "Dr in\u017c. Wojciech Thomas",
+				"typ": "Wyk\u0142ad",
+				"godzina": "cz/TN+1/2 09:15-11:00, bud. D-1, sala 30"
+			}
+		]
+	}
+]

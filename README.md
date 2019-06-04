@@ -1,3 +1,4 @@
+
 # Timetable Selector
 It is a web application designed to select proper timetable from available course pool.
 
@@ -49,16 +50,25 @@ This application is designed to work as web api, with client written in JS.
 
 # Usage
 1. First of all you should create user account. To do so, please click on "Register!" button in top right corner.
-<img src="https://raw.githubusercontent.com/classOlek/plan-generator/master/doc/0.png" />
+<center><img src="https://raw.githubusercontent.com/classOlek/plan-generator/master/doc/0.png" /></center>
 Then fill it with your credentials.
 
-2.After creating account you should login with account created in step 1.
-<img src="https://raw.githubusercontent.com/classOlek/plan-generator/master/doc/1.png" />
+2. After creating account you should login with account created in step 1.
+<center><img src="https://raw.githubusercontent.com/classOlek/plan-generator/master/doc/1.png" /></center>
 
 After logging in you'll notice control panel looking like this:
-<img src="https://raw.githubusercontent.com/classOlek/plan-generator/master/doc/2.png" />
+<center><img src="https://raw.githubusercontent.com/classOlek/plan-generator/master/doc/2.png" /></center>
 
-3. 
-<img src="https://raw.githubusercontent.com/classOlek/plan-generator/master/doc/3.png" />
-<img src="https://raw.githubusercontent.com/classOlek/plan-generator/master/doc/4.png" />
-<img src="https://raw.githubusercontent.com/classOlek/plan-generator/master/doc/5.png" />
+3. To generate timetable you need to upload your data source first. To do so you can use scripts prepared to fetch them from your university website. Eventually you can prepare them yourself. You can find dataSimple.json file in "sample" folder.
+<center><img src="https://raw.githubusercontent.com/classOlek/plan-generator/master/doc/3.png" /></center>
+
+4. Right side of control panel is dedicated for user conditions that are global for all data sources. You can set up conditions like days off or class limitations.
+5. After setting up conditions, you should select data source from list on the left side.
+6. In next step you should choose which courses you're interested in. Also it is possible to avoid specific lecturers by simply unchecking them.
+<center><img src="https://raw.githubusercontent.com/classOlek/plan-generator/master/doc/5.png" /></center>
+7. After clicking "Generate" button there is last step that require you to browse through generated timetables.
+<center><img src="https://raw.githubusercontent.com/classOlek/plan-generator/master/doc/4.png" /></center>
+
+# Database Scheme
+Since there is very few data stored on the server side, I decided to use No-SQL database. MongoDB is document based (JSON-like) db, that is really easy to modify, with no need to declare it structure.
+User accounts and data sources are stored in two separated collections, configurable in Configuration.cs file.
