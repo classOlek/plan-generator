@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using TimetableGenerator.Models;
 using TimetableGenerator.Models.DatabaseModels;
 using TimetableGenerator.Models.LocalModels;
+using TimetableGenerator.Models.SharedModels;
 
 namespace TimetableGenerator
 {
@@ -31,6 +32,20 @@ namespace TimetableGenerator
                 GetUsersCollection().UpdateOne<UserDbModel>(o => o.Name == name, updateDef);
                 return true;
             }catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public bool UpdateUserCourseLecturerSettings(string name, int hashCode, IEnumerable<CourseLecturerSettings> courseLecturerSettings)
+        {
+            var updateDef = Builders<TimetableDataDbModel>.Update.Set(o => o.CourseLecturerSettings, courseLecturerSettings);
+            try
+            {
+                GetTimetableDataCollection().UpdateOne<TimetableDataDbModel>(o => o._id == GetTimetableDataByHashCode(name, hashCode)._id, updateDef);
+                return true;
+            }
+            catch (Exception)
             {
                 return false;
             }

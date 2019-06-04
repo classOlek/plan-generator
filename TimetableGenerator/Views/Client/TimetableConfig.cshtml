@@ -4,8 +4,8 @@
 }
 
 <link rel="stylesheet" href="~/css/modal.css" />
-<link rel="stylesheet" href="~/css/simplePagination.css" />
 <link rel="stylesheet" href="~/css/timetable.css" />
+<link rel="stylesheet" href="~/css/simTree.css" />
 
 <script>
     var currentId = 1;
@@ -35,8 +35,8 @@
 
 </script>
 
-<script src="~/js/pagination.js"></script>
 <script src="~/js/conditionsUIGenerator.js"></script>
+<script src="~/js/simTree.js"></script>
 
 <form method="POST" action="/api/account/updateConditions" id="saveForm">
     <input type="hidden" name="saveFormData" id="saveFormData" value="[]">
@@ -242,6 +242,55 @@
     var timetableCurrent = 0;
     var timetableDisplay = false;
 
+    var tree;
+    var lecturersData = [];
+
+    function generateTree(data, element) {
+        let myData2 = [];
+        let x = 1;
+        data.forEach(course => {
+            myData2.push({
+                "id": course.courseCode,
+                "pid": '',
+                "name": course.courseName,
+                "checked": "checked"
+            });
+            course['lecturerSettings'].forEach(prow => {
+                    myData2.push({
+                    "id": x++,
+                    "pid": course.courseCode,
+                    "name": prow['lecturer']
+                });
+            });
+        });
+
+        tree = simTree({
+            el: element,
+            data: function (obj, callback) {
+                callback(myData2);
+            },
+            check: true,
+            linkParent: true,
+            onClick: function (item) {
+
+            },
+            onChange: function (item) {
+                
+            }
+        });
+
+        x = 1;
+        data.forEach(course => {
+            course['lecturerSettings'].forEach(prow => {
+                if (prow['isBlocked']) {
+                    x++;
+                } else {
+                    tree.setSelected(x++);
+                }
+            });
+        });
+    }
+
     function showModal(hashCode) {
         content.innerHTML = '<strong>Loading...</strong>';
         modal.style.display = "block";
@@ -249,32 +298,73 @@
             .then(data => data.json())
             .then(data => {
                 if (data['response'] == 'success') {
-                    content.innerHTML = hashCode + "<br>" +
-                        '<input type="submit" onclick="generateTimetable(' + hashCode + ')" class="btn btn-primary" value="Generate" />';
+                    content.innerHTML = '<div id="tree"></div><input type="submit" onclick="generateTimetable(' + hashCode + ')" class="btn btn-primary" value="Generate" />';
+                    lecturersData = data['data'];
+                    generateTree(data['data'], "#tree");
                 } else {
                     throw 'error';
                 }
             })
-            .catch(a => content.innerHTML = "something went wrong");
+            .catch(a => content.innerHTML = "something went wrong" + a);
     };
+
+    function unblockLecturer(courseCode, lecturer) {
+        try {
+            lecturersData.forEach(data => {
+                if (data['courseCode'] === courseCode) {
+                    data['lecturerSettings'].forEach(lec => {
+                        if (lec['lecturer'] === lecturer) {
+                            lec['isBlocked'] = false;
+                            throw BreakException;
+                        }
+                    });
+                }
+            });
+        } catch (e) {}
+    }
+
+    function getUpdatedLecturersData() {
+        if (tree.getSelected().length > 1) {
+            lecturersData.forEach(data => {
+                data['lecturerSettings'].forEach(lecturer => {
+                    lecturer['isBlocked'] = true;
+                });
+            });
+            tree.getSelected().forEach(element => {
+                if (element['pid'] !== "") {
+                    let courseCode = element['pid'];
+                    let lecturer = element['name'];
+                    unblockLecturer(courseCode, lecturer);
+                };
+            });
+        }
+        return lecturersData;
+    }
 
     function generateTimetable(hashCode) {
         content.innerHTML = '<strong>Loading...</strong>';
         modal.style.display = "block";
-        fetch(window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + "/api/timetable/generateTimetable?hashCode=" + hashCode)
-            .then(data => data.json())
-            .then(data => {
-                if (data['response'] == 'success') {
-                    content.innerHTML = '<nav aria-label="..."> <ul class="pagination"> <li class="page-item"> <button class="page-link" onclick="prevTimetable()" tabindex="-1"><<</button> </li> <li class="page-item disabled"> <button id="curTim" class="page-link">0/0</button> </li> <li class="page-item"> <button class="page-link" onclick="nextTimetable()">>></button> </li> </ul> </nav><div id="timCont"></div>';
-                    timetableData = data['data'];
-                    timetableCurrent = 1;
-                    prevTimetable();
-                    timetableDisplay = true;
-                } else {
-                    throw 'error';
-                }
-            })
-            .catch(a => content.innerHTML = "something went wrong");
+        fetch(window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + "/api/timetable/generateTimetable?hashCode=" + hashCode,
+        {
+            method: "POST",
+            body: JSON.stringify(getUpdatedLecturersData()),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+        .then(data => data.json())
+        .then(data => {
+            if (data['response'] == 'success') {
+                content.innerHTML = '<nav aria-label="..."> <ul class="pagination"> <li class="page-item"> <button class="page-link" onclick="prevTimetable()" tabindex="-1"><<</button> </li> <li class="page-item disabled"> <button id="curTim" class="page-link">0/0</button> </li> <li class="page-item"> <button class="page-link" onclick="nextTimetable()">>></button> </li> </ul> </nav><div id="timCont"></div>';
+                timetableData = data['data'];
+                timetableCurrent = 1;
+                prevTimetable();
+                timetableDisplay = true;
+            } else {
+                throw 'error';
+            }
+        })
+        .catch(a => content.innerHTML = "something went wrong" + a);
     }
 
     function nextTimetable() {
@@ -373,7 +463,6 @@
         document.getElementById('curTim').innerHTML = (index + 1) + '/' + timetableData.length;
         document.getElementById('timCont').innerHTML = JSON.stringify(timetableData[index]);
         document.getElementById('timCont').innerHTML = timetableBase.innerHTML;
-        console.log(timetableData[index]['groupList']);
         var dayMonday = document.getElementById('dayMonday');
         var dayTuesday = document.getElementById('dayTuesday');
         var dayWednesday = document.getElementById('dayWednesday');

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using TimetableGenerator.Models;
 using TimetableGenerator.Models.DatabaseModels;
 using TimetableGenerator.Models.LocalModels;
+using TimetableGenerator.Models.SharedModels;
 
 namespace TimetableGenerator.Services
 {

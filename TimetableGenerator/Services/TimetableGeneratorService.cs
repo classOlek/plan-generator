@@ -18,7 +18,7 @@ namespace TimetableGenerator.Services
         public IEnumerable<Timetable> GenerateTimetableList(TimetableData data, string conditions)
         {
             List<Timetable> returnList = new List<Timetable>();
-            Rec(data.CourseList.ToList(), new List<CourseDetails>(), new List<CourseTime>(), ref returnList);
+            Rec(SetupCourseData(data), new List<CourseDetails>(), new List<CourseTime>(), ref returnList);
             return returnList;
         }
 
@@ -28,10 +28,6 @@ namespace TimetableGenerator.Services
             {
                 CourseData courseData = courseList[courseList.Count() - 1];
                 courseList.RemoveAt(courseList.Count() - 1);
-                if(courseData.CourseName == "Zaaw. technologie webowe")
-                {
-                    string x = "x";
-                }
                 foreach(CourseDetails group in courseData.GroupList)
                 {
                     if (returnList.Count() < ResultLimit)
@@ -52,6 +48,67 @@ namespace TimetableGenerator.Services
             {
                 if(prevTimetable.Count > 0) returnList.Add(new Timetable { GroupList = prevTimetable });
             }
+        }
+
+        private List<CourseData> SetupCourseData(TimetableData data)
+        {
+            List<CourseData> courseDataList = data.CourseList.ToList();
+            for(int i = 0; i < courseDataList.Count; i++)
+            {
+                if(ShouldDeleseCourseFromList(courseDataList[i].CourseCode, data.CourseLecturerSettings))
+                {
+                    courseDataList.RemoveAt(i--);
+                }
+                else
+                {
+                    List<CourseDetails> details = courseDataList[i].GroupList.ToList();
+                    for (int j = 0; j < details.Count; j++)
+                    {
+                        if(ShouldRemoveLecturerFromCourse(courseDataList[i].CourseCode, details[j].Lecturer, data.CourseLecturerSettings))
+                        {
+                            details.RemoveAt(j--);
+                        }
+                    }
+                    courseDataList[i].GroupList = details;
+                }
+            }
+            return courseDataList;
+        }
+
+        private bool ShouldDeleseCourseFromList(string courseCode, IEnumerable<CourseLecturerSettings> settings)
+        {
+            foreach(CourseLecturerSettings s in settings)
+            {
+                if(s.CourseCode == courseCode)
+                {
+                    foreach(LecturerSettings ls in s.LecturerSettings)
+                    {
+                        if (ls.IsBlocked == false) return false;
+                    }
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private bool ShouldRemoveLecturerFromCourse(string courseCode, string lecturer, IEnumerable<CourseLecturerSettings> settings)
+        {
+            foreach (CourseLecturerSettings s in settings)
+            {
+                if (s.CourseCode == courseCode)
+                {
+                    foreach (LecturerSettings ls in s.LecturerSettings)
+                    {
+                        if (ls.Lecturer == lecturer)
+                        {
+                            if(ls.IsBlocked == true)
+                                return true;
+                            return false;
+                        }
+                    }
+                }
+            }
+            return false;
         }
 
         private bool IsCourseTimeColliding(CourseTime courseTime, List<CourseTime> usedTime)

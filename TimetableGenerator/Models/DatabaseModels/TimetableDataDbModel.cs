@@ -14,5 +14,6 @@ namespace TimetableGenerator.Models.DatabaseModels
         public string SourceName { get; set; }
         public DateTime Time { get; set; }
         public IEnumerable<CourseData> CourseList { get; set; }
+        public IEnumerable<CourseLecturerSettings> CourseLecturerSettings { get; set; }
     }
 }

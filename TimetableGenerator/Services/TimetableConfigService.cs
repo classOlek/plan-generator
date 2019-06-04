@@ -59,10 +59,50 @@ namespace TimetableGenerator.Services
                     SourceName = dbModel.SourceName,
                     Time = dbModel.Time,
                     HashCode = dbModel._id.GetHashCode(),
-                    CourseList = dbModel.CourseList
+                    CourseList = dbModel.CourseList,
+                    CourseLecturerSettings = dbModel.CourseLecturerSettings
                 };
             }
             return null;
+        }
+
+        public bool UpdateUserCourseLecturerSettings(string name, int hashCode, IEnumerable<CourseLecturerSettings> courseLecturerSettings)
+        {
+            return _databaseService.UpdateUserCourseLecturerSettings(name, hashCode, courseLecturerSettings);
+        }
+
+        public IEnumerable<CourseLecturerSettings> GenerateCourseLecturerSettings(TimetableData timetableData)
+        {
+            List<CourseLecturerSettings> courseLecturerSettingsList = new List<CourseLecturerSettings>();
+            foreach(CourseData data in timetableData.CourseList)
+            {
+                courseLecturerSettingsList.Add(new CourseLecturerSettings
+                {
+                    CourseName = data.CourseName,
+                    CourseCode = data.CourseCode,
+                    LecturerSettings = GenerateLecturerSettings(data)
+                });
+            }
+            return courseLecturerSettingsList;
+        }
+
+        private IEnumerable<LecturerSettings> GenerateLecturerSettings(CourseData data)
+        {
+            List<string> lecturers = new List<string>();
+            List<LecturerSettings> lecturerSettingsList = new List<LecturerSettings>();
+            foreach(CourseDetails details in data.GroupList)
+            {
+                if (!lecturers.Contains(details.Lecturer))
+                {
+                    lecturers.Add(details.Lecturer);
+                    lecturerSettingsList.Add(new LecturerSettings
+                    {
+                        Lecturer = details.Lecturer,
+                        IsBlocked = false
+                    });
+                }
+            }
+            return lecturerSettingsList;
         }
 
         private IEnumerable<TimetableData> GetTimetableData(IEnumerable<TimetableDataDbModel> timetableDataDbModel)

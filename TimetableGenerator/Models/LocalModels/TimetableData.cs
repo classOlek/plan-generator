@@ -13,5 +13,6 @@ namespace TimetableGenerator.Models
         public DateTime Time { get; set; }
         public int HashCode { get; set; }
         public IEnumerable<CourseData> CourseList { get; set; }
+        public IEnumerable<CourseLecturerSettings> CourseLecturerSettings { get; set; }
     }
 }

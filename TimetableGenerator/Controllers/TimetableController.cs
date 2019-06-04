@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TimetableGenerator.Models;
 using TimetableGenerator.Models.LocalModels;
+using TimetableGenerator.Models.SharedModels;
 using TimetableGenerator.Services;
 
 namespace TimetableGenerator.Controllers
@@ -52,14 +53,21 @@ namespace TimetableGenerator.Controllers
         public IActionResult GetCourseData([FromQuery] int hashCode)
         {
             TimetableData data = _timetableConfigService.GetTimetableDataByHashCode(User.Identity.Name, hashCode);
-            if (data != null) return Ok(new { response = "success", data = data });
+            if (data != null)
+            {
+                if (data.CourseLecturerSettings == null) data.CourseLecturerSettings = _timetableConfigService.GenerateCourseLecturerSettings(data);
+                return Ok(new { response = "success", data = data.CourseLecturerSettings });
+            }
             return Ok(new { response = "not found" });
         }
 
-        [HttpGet("generateTimetable")]
-        public IActionResult GenerateTimetable([FromQuery] int hashCode)
+        [HttpPost("generateTimetable")]
+        public IActionResult GenerateTimetable([FromQuery] int hashCode, [FromBody] IEnumerable<CourseLecturerSettings> courseLecturerSettings)
         {
+            bool courseUpdate = _timetableConfigService.UpdateUserCourseLecturerSettings(User.Identity.Name, hashCode, courseLecturerSettings);
+
             TimetableData data = _timetableConfigService.GetTimetableDataByHashCode(User.Identity.Name, hashCode);
+            if(!courseUpdate) return Ok(new { response = "failed to update course lecturer settings!" });
             if (data != null)
             {
                 IEnumerable<Timetable> timetableList = _timetableGeneratorService.GenerateTimetableList(data, "");
