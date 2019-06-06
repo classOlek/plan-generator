@@ -72,3 +72,11 @@ After logging in you'll notice control panel looking like this:
 # Database Scheme
 Since there is very few data stored on the server side, I decided to use No-SQL database. MongoDB is document based (JSON-like) db, that is really easy to modify, with no need to declare it structure.
 User accounts and data sources are stored in two separated collections, configurable in Configuration.cs file.
+MongoDB works like collections from object-oriented programming languages.
+In order to store data, all you need to do is to create Model, and push instance into database.
+
+# Algorithm
+1. First step after setting up all conditions is to remove unnecessary data from collections, that we're working with (courses/groups). To do so, algorithm is checking which lecturers/courses are disabled by user, just to make computing faster.
+2. Second step is initialization of structure that'll track which hours are already taken. It is initialized with terms specified in global conditions.
+3. After that, we'll sort courses and groups by priorities selected by users.
+4. Last step is to generate first 500 combinations (or all if less is possible) while taking one group from each course.
