@@ -44,62 +44,83 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-5 panel">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Source</th>
-                        <th scope="col">Time</th>
-                        <th scope="col">Groups</th>
-                        <th scope="col">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @for (int i = 1; i <= Model.TimetableDataList.Count(); i++)
-                    {
-                        <tr>
-                            <th scope="row">@i</th>
-                            <td>@Model.TimetableDataList.ElementAt(i - 1).SourceName</td>
-                            <td>@Model.TimetableDataList.ElementAt(i - 1).Time</td>
-                            <td>@Model.TimetableDataList.ElementAt(i - 1).CourseList.Count()</td>
-                            <td><input type="submit" onclick="showModal(@Model.TimetableDataList.ElementAt(i - 1).HashCode)" class="btn btn-primary" value=">" /></td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-            <hr style="border-top: 1px solid #8c8b8b;" />
-            <form name="form1" method="post" enctype="multipart/form-data" action="api/timetable/uploadCourses">
-                Add new data source: <div>
-                    <input name="file" type="file" />
+        <div class="col-12 col-xl-6">
+            <div class="container">
+                <div class="row">
+                    <table class="table" style="border: 1px solid rgba(0, 0, 0, 0.125); padding: 0.75rem 1.25rem;">
+                        <thead>
+                            <tr>
+                                <th scope="col" class="col-1">#</th>
+                                <th scope="col">Source</th>
+                                <th scope="col" class="col-2">Groups</th>
+                                <th scope="col" class="col-1">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (int i = 1; i <= Model.TimetableDataList.Count(); i++)
+                            {
+                                <tr style="border: 1px solid rgba(0, 0, 0, 0.125);">
+                                    <th scope="row" style="font-size: 15px;">@i</th>
+                                    <td style="font-size: 15px;">@Model.TimetableDataList.ElementAt(i - 1).SourceName</td>
+                                    <td style="font-size: 15px;">@Model.TimetableDataList.ElementAt(i - 1).CourseList.Count()</td>
+                                    <td><input type="submit" onclick="showModal(@Model.TimetableDataList.ElementAt(i - 1).HashCode)" class="btn btn-primary" value=">" /></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
                 </div>
-                <div>
-                    <input type="submit" class="btn btn-primary" value="Submit" />
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <button id="addSourceButton" class="btn btn-primary" onclick="showAddNewDataSource();" style="width: 100%">Add New Data Source</button>
+                    </div>
                 </div>
-            </form>
-        </div>
+                </div>
+                <hr style="border-top: 1px solid #8c8b8b;" />
+            </div>
 
-        <div class="col-md-7" style="background-color:none;">
-            <ul id="sortable" class="list-group"></ul>
-            <button id="saveButton" class="btn btn-primary" onclick="saveSettings('sortable');">Save</button>
-            <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Add condition
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" onclick="addNoClassesBefore(currentId++, 'sortable', 'Monday', '8:00');">No classes before</a>
-                    <a class="dropdown-item" onclick="addNoClassesAfter(currentId++, 'sortable', 'Monday', '8:00');">No classes after</a>
+                <div class="col-12 col-xl-6" style="background-color:none;">
+                    <ul id="sortable" class="list-group"></ul>
+                    <div class="container" style="padding-top: 20px;">
+                        <div class="row">
+                            <div class="col">
+                                <button id="saveButton" class="btn btn-primary" onclick="saveSettings('sortable');" style="width: 100%">Save</button>
+                            </div>
+                            <div class="col">
+                                <div class="dropdown">
+                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width: 100%">
+                                        Add condition
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" onclick="addNoClassesBefore(currentId++, 'sortable', 'Monday', '8:00');">No classes before</a>
+                                        <a class="dropdown-item" onclick="addNoClassesAfter(currentId++, 'sortable', 'Monday', '8:00');">No classes after</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr style="border-top: 1px solid #8c8b8b;" />
                 </div>
             </div>
         </div>
-    </div>
-</div>
 
 <div id="myModal" class="modal">
-    <div class="modal-content" style="width: 1050px;">
+    <div class="modal-content" style="min-width: 322px;">
         <div id="closeModal" class="close2">&times;</div>
         <div id="actual-modal-content"><p>Some text in the Modal..</p></div>
     </div>
+</div>
+
+<div id="addSource" style="display: none;">
+    <form name="form1" method="post" enctype="multipart/form-data" action="api/timetable/uploadCourses">
+        Select data source file: <div>
+            <input name="file" type="file" />
+        </div>
+        <div>
+            <input type="submit" class="btn btn-primary" value="Submit" />
+        </div>
+    </form>
 </div>
 
 <div id="timetableBase" style="display: none;">
@@ -226,6 +247,7 @@
             <span class="c_X">Inne</span>
         </div>
     </div>
+
 </div>
 
 <script>
@@ -234,6 +256,7 @@
     var span2 = document.getElementById("closeModal");
     var content = document.getElementById("actual-modal-content");
     var timetableBase = document.getElementById("timetableBase");
+    var addSource = document.getElementById("addSource");
 
     var hoursFrom = 7;
     var hoursTo = 21;
@@ -290,6 +313,11 @@
             });
         });
     }
+
+    function showAddNewDataSource() {
+        content.innerHTML = addSource.innerHTML;
+        modal.style.display = "block";
+    };
 
     function showModal(hashCode) {
         content.innerHTML = '<strong>Loading...</strong>';
@@ -380,7 +408,7 @@
     };
 
     function generateEntry(entryData) {
-        var baseDatetime = new Date('1970-01-01T7:00:00Z');
+        var baseDatetime = new Date('1970-01-01T07:00:00Z');
         var hourString = entryData['godzina'].split(" ")[1].split(",")[0];
         var splitted = hourString.split("-");
         var startHour = splitted[0];
