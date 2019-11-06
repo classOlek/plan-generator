@@ -40,6 +40,7 @@
 
 <form method="POST" action="/api/account/updateConditions" id="saveForm">
     <input type="hidden" name="saveFormData" id="saveFormData" value="[]">
+    <input name="shouldRedirect" type="hidden" id="shouldRedirect" value="1">
 </form>
 
 <div class="container">
@@ -60,9 +61,9 @@
                             @for (int i = 1; i <= Model.TimetableDataList.Count(); i++)
                             {
                                 <tr style="border: 1px solid rgba(0, 0, 0, 0.125);">
-                                    <th scope="row" style="font-size: 15px;">@i</th>
-                                    <td style="font-size: 15px;">@Model.TimetableDataList.ElementAt(i - 1).SourceName</td>
-                                    <td style="font-size: 15px;">@Model.TimetableDataList.ElementAt(i - 1).CourseList.Count()</td>
+                                    <th scope="row" style="font-size: 10px;">@i</th>
+                                    <td style="font-size: 10px;">@Model.TimetableDataList.ElementAt(i - 1).SourceName</td>
+                                    <td style="font-size: 10px;">@Model.TimetableDataList.ElementAt(i - 1).CourseList.Count()</td>
                                     <td><input type="submit" onclick="showModal(@Model.TimetableDataList.ElementAt(i - 1).HashCode)" class="btn btn-primary" value=">" /></td>
                                 </tr>
                             }

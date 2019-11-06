@@ -21,9 +21,10 @@ namespace TimetableGenerator.Controllers
             _accountService = accountService;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string msg)
         {
-            if(User.Identity.IsAuthenticated)
+            ViewBag.ClientMsg = msg;
+            if (User.Identity.IsAuthenticated)
             {
                 return View("TimetableConfig", new TimetableConfig
                 {
