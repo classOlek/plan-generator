@@ -77,34 +77,34 @@
                         <button id="addSourceButton" class="btn btn-primary" onclick="showAddNewDataSource();" style="width: 100%">Add New Data Source</button>
                     </div>
                 </div>
-                </div>
-                <hr style="border-top: 1px solid #8c8b8b;" />
             </div>
+            <hr style="border-top: 1px solid #8c8b8b;" />
+        </div>
 
-                <div class="col-12 col-xl-6" style="background-color:none;">
-                    <ul id="sortable" class="list-group"></ul>
-                    <div class="container" style="padding-top: 20px;">
-                        <div class="row">
-                            <div class="col">
-                                <button id="saveButton" class="btn btn-primary" onclick="saveSettings('sortable');" style="width: 100%">Save</button>
-                            </div>
-                            <div class="col">
-                                <div class="dropdown">
-                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width: 100%">
-                                        Add condition
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" onclick="addNoClassesBefore(currentId++, 'sortable', 'Monday', '8:00');">No classes before</a>
-                                        <a class="dropdown-item" onclick="addNoClassesAfter(currentId++, 'sortable', 'Monday', '8:00');">No classes after</a>
-                                    </div>
-                                </div>
+        <div class="col-12 col-xl-6" style="background-color:none;">
+            <ul id="sortable" class="list-group"></ul>
+            <div class="container" style="padding-top: 20px;">
+                <div class="row">
+                    <div class="col">
+                        <button id="saveButton" class="btn btn-primary" onclick="saveSettings('sortable');" style="width: 100%">Save</button>
+                    </div>
+                    <div class="col">
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width: 100%">
+                                Add condition
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" onclick="addNoClassesBefore(currentId++, 'sortable', 'Monday', '8:00');">No classes before</a>
+                                <a class="dropdown-item" onclick="addNoClassesAfter(currentId++, 'sortable', 'Monday', '8:00');">No classes after</a>
                             </div>
                         </div>
                     </div>
-                    <hr style="border-top: 1px solid #8c8b8b;" />
                 </div>
             </div>
+            <hr style="border-top: 1px solid #8c8b8b;" />
         </div>
+    </div>
+</div>
 
 <div id="myModal" class="modal">
     <div class="modal-content" style="min-width: 322px;">
@@ -252,6 +252,7 @@
 </div>
 
 <script>
+    var isResponsive = false;
     var modal = document.getElementById("myModal");
     var btn = document.getElementById("myBtn");
     var span2 = document.getElementById("closeModal");
@@ -280,7 +281,7 @@
                 "checked": "checked"
             });
             course['lecturerSettings'].forEach(prow => {
-                    myData2.push({
+                myData2.push({
                     "id": x++,
                     "pid": course.courseCode,
                     "name": prow['lecturer']
@@ -299,7 +300,7 @@
 
             },
             onChange: function (item) {
-                
+
             }
         });
 
@@ -349,7 +350,7 @@
                     });
                 }
             });
-        } catch (e) {}
+        } catch (e) { }
     }
 
     function getUpdatedLecturersData() {
@@ -374,26 +375,26 @@
         content.innerHTML = '<strong>Loading...</strong>';
         modal.style.display = "block";
         fetch(window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + "/api/timetable/generateTimetable?hashCode=" + hashCode,
-        {
-            method: "POST",
-            body: JSON.stringify(getUpdatedLecturersData()),
-            headers: {
-                "Content-Type": "application/json"
-            }
-        })
-        .then(data => data.json())
-        .then(data => {
-            if (data['response'] == 'success') {
-                content.innerHTML = '<nav aria-label="..."> <ul class="pagination"> <li class="page-item"> <button class="page-link" onclick="prevTimetable()" tabindex="-1"><<</button> </li> <li class="page-item disabled"> <button id="curTim" class="page-link">0/0</button> </li> <li class="page-item"> <button class="page-link" onclick="nextTimetable()">>></button> </li> </ul> </nav><div id="timCont"></div>';
-                timetableData = data['data'];
-                timetableCurrent = 1;
-                prevTimetable();
-                timetableDisplay = true;
-            } else {
-                throw 'error';
-            }
-        })
-        .catch(a => content.innerHTML = "something went wrong" + a);
+            {
+                method: "POST",
+                body: JSON.stringify(getUpdatedLecturersData()),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
+            .then(data => data.json())
+            .then(data => {
+                if (data['response'] == 'success') {
+                    content.innerHTML = '<nav aria-label="..."> <ul class="pagination"> <li class="page-item"> <button class="page-link" onclick="prevTimetable()" tabindex="-1"><<</button> </li> <li class="page-item disabled"> <button id="curTim" class="page-link">0/0</button> </li> <li class="page-item"> <button class="page-link" onclick="nextTimetable()">>></button> </li> </ul> </nav><div id="timCont"></div><div id="timContImg"></div>';
+                    timetableData = data['data'];
+                    timetableCurrent = 1;
+                    prevTimetable();
+                    timetableDisplay = true;
+                } else {
+                    throw 'error';
+                }
+            })
+            .catch(a => content.innerHTML = "something went wrong" + a);
     }
 
     function nextTimetable() {
@@ -512,9 +513,24 @@
                 dayFriday.append(entry);
             }
         }
+
+        if (isResponsive) {
+            document.getElementById('timCont').hidden = false;
+            html2canvas(document.getElementById('timCont'),{
+                scrollX: 0,
+                scrollY: 0,
+                width: 1000,
+                height: 1000
+            }).then(can => {
+                console.log('t');
+                var canvasImg = can.toDataURL("image/jpg");
+                $('#timContImg').html('<img src="' + canvasImg + '" alt="" style="width: 100%; height:auto;">');
+            });
+            document.getElementById('timCont').hidden = true;
+        }
     };
 
-    document.onkeydown = function(e) {
+    document.onkeydown = function (e) {
         switch (e.keyCode) {
             case 37:
                 if (timetableDisplay) {

@@ -23,30 +23,21 @@
             <div class="container">
                 <div class="container">
                     <div class="row">
+                        <div class="col-11">
                             <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">TimetableGenerator</a>
-                        
-                        <!--<button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-            aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-        <ul class="navbar-nav flex-grow-1">
-            <li class="nav-item">
-                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-            </li>
-        </ul>
+                        </div>
 
-    </div>-->
-                                @if (User.Identity.IsAuthenticated)
-                                {
-                                    <a id="logout_button" class="btn btn-danger" href="api/account/logout?shouldRedirect=1">Logout!</a>
-                                }
-                                else
-                                {
-                            
+                        <div class="col-1">
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <a id="logout_button" class="btn btn-danger" href="api/account/logout?shouldRedirect=1">Logout!</a>
+                            }
+                            else
+                            {
+
                                 <button id="register_button" type="button" class="btn btn-danger" data-toggle="popover" data-placement="bottom" title="Registration panel">Register!</button>
                                 <button id="login_button" type="button" style="margin-left: 10px" class="btn btn-primary" data-toggle="popover" data-placement="bottom" title="Login panel">Login!</button>
-                            
+
                                 <div id="login_popover_content" hidden>
                                     <form action="api/account/login" method="POST">
                                         <div class="form-group">
@@ -61,28 +52,29 @@
                                         <button type="submit" class="btn btn-primary">Submit</button>
                                     </form>
                                 </div>
-                            <div id="register_popover_content" hidden>
-                                <form action="api/account/register" method="POST">
-                                    <div class="form-group">
-                                        <label for="inputLogin">Login</label>
-                                        <input name="login" type="text" class="form-control" id="inputLogin" aria-describedby="inputLogin" placeholder="Login">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputPassword">Password</label>
-                                        <input name="password" type="password" class="form-control" id="inputPassword" placeholder="Password">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputPassword">Confirm password</label>
-                                        <input name="password2" type="password" class="form-control" id="inputPassword2" placeholder="Confirm password">
-                                    </div>
-                                    <input name="shouldRedirect" type="hidden" id="shouldRedirect" value="1">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                </form>
-                            </div>
-                        }
+                                <div id="register_popover_content" hidden>
+                                    <form action="api/account/register" method="POST">
+                                        <div class="form-group">
+                                            <label for="inputLogin">Login</label>
+                                            <input name="login" type="text" class="form-control" id="inputLogin" aria-describedby="inputLogin" placeholder="Login">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputPassword">Password</label>
+                                            <input name="password" type="password" class="form-control" id="inputPassword" placeholder="Password">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputPassword">Confirm password</label>
+                                            <input name="password2" type="password" class="form-control" id="inputPassword2" placeholder="Confirm password">
+                                        </div>
+                                        <input name="shouldRedirect" type="hidden" id="shouldRedirect" value="1">
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </form>
+                                </div>
+                            }
+                        </div>
                     </div>
-                    </div>
-                    </div>
+                </div>
+            </div>
         </nav>
     </header>
 
@@ -94,14 +86,14 @@
 
     @if (@ViewBag.ClientMsg != null)
     {
-    <div class="container">
+        <div class="container">
             <div id="displayMsg" class="alert alert-info alert-dismissible fade show" style="font-size:14px;" role="alert">
                 @ViewBag.ClientMsg
                 <button type="button" class="accept-policy close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">Close</span>
                 </button>
             </div>
-    </div>
+        </div>
     }
 
     <div class="container" style="padding-bottom: 70px;">
@@ -131,6 +123,7 @@
         </script>
     </environment>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/html2canvas.js" asp-append-version="true"></script>
 
     @if (!User.Identity.IsAuthenticated)
     {
