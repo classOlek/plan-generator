@@ -21,11 +21,13 @@ namespace TimetableGenerator.Controllers
     {
         private readonly TimetableConfigService _timetableConfigService;
         private readonly TimetableGeneratorService _timetableGeneratorService;
+        private readonly AccountService _accountService;
 
-        public TimetableController(TimetableConfigService timetableConfigService, TimetableGeneratorService timetableGeneratorService)
+        public TimetableController(TimetableConfigService timetableConfigService, TimetableGeneratorService timetableGeneratorService, AccountService accountService)
         {
             _timetableConfigService = timetableConfigService;
             _timetableGeneratorService = timetableGeneratorService;
+            _accountService = accountService;
         }
 
         [HttpPost("uploadCourses")]
@@ -66,11 +68,13 @@ namespace TimetableGenerator.Controllers
         {
             bool courseUpdate = _timetableConfigService.UpdateUserCourseLecturerSettings(User.Identity.Name, hashCode, courseLecturerSettings);
 
+            string conditions = _accountService.GetUser(User.Identity.Name).Conditions;
+
             TimetableData data = _timetableConfigService.GetTimetableDataByHashCode(User.Identity.Name, hashCode);
             if(!courseUpdate) return Ok(new { response = "failed to update course lecturer settings!" });
             if (data != null)
             {
-                IEnumerable<Timetable> timetableList = _timetableGeneratorService.GenerateTimetableList(data, "");
+                IEnumerable<Timetable> timetableList = _timetableGeneratorService.GenerateTimetableList(data, conditions);
                 return Ok(new { response = "success", data = timetableList });
             }
             return Ok(new { response = "not found" });

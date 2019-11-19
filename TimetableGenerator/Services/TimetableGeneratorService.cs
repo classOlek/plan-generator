@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -18,7 +19,8 @@ namespace TimetableGenerator.Services
         public IEnumerable<Timetable> GenerateTimetableList(TimetableData data, string conditions)
         {
             List<Timetable> returnList = new List<Timetable>();
-            Rec(SetupCourseData(data), new List<CourseDetails>(), new List<CourseTime>(), ref returnList);
+            List<CourseTime> courseTime = ParseConditionsToCourseTime(conditions);
+            Rec(SetupCourseData(data), new List<CourseDetails>(), courseTime, ref returnList);
             return returnList;
         }
 
@@ -109,6 +111,86 @@ namespace TimetableGenerator.Services
                 }
             }
             return false;
+        }
+
+        private List<CourseTime> ParseConditionsToCourseTime(string conditions)
+        {
+            List<CourseTime> courseTimeList = new List<CourseTime>();
+            JArray jsonArray = JArray.Parse(conditions);
+            foreach(dynamic condition in jsonArray)
+            {
+                string type = condition.type;
+
+                string time = condition.hour;
+                string day = condition.day;
+                bool everyday = false;
+                switch (day)
+                {
+                    case "Monday":
+                        day = "pn";
+                        break;
+                    case "Tuesday":
+                        day = "wt";
+                        break;
+                    case "Wednesday":
+                        day = "śr";
+                        break;
+                    case "Thursday":
+                        day = "cz";
+                        break;
+                    case "Friday":
+                        day = "pt";
+                        break;
+                    case "Everyday":
+                        everyday = true;
+                        break;
+                }
+
+                switch (type)
+                {
+                    case "noClassesBefore":
+                        if (everyday)
+                        {
+                            courseTimeList.Add(CreateCourseTime("pn", "7:00", time));
+                            courseTimeList.Add(CreateCourseTime("wt", "7:00", time));
+                            courseTimeList.Add(CreateCourseTime("śr", "7:00", time));
+                            courseTimeList.Add(CreateCourseTime("cz", "7:00", time));
+                            courseTimeList.Add(CreateCourseTime("pt", "7:00", time));
+                        }
+                        else
+                        {
+                            courseTimeList.Add(CreateCourseTime(day, "7:00", time));
+                        }
+                        break;
+                    case "noClassesAfter":
+                      
+                        if(everyday)
+                        {
+                            courseTimeList.Add(CreateCourseTime("pn", time, "23:00"));
+                            courseTimeList.Add(CreateCourseTime("wt", time, "23:00"));
+                            courseTimeList.Add(CreateCourseTime("śr", time, "23:00"));
+                            courseTimeList.Add(CreateCourseTime("cz", time, "23:00"));
+                            courseTimeList.Add(CreateCourseTime("pt", time, "23:00"));
+                        } else
+                        {
+                            courseTimeList.Add(CreateCourseTime(day, time, "23:00"));
+                        }
+                        break;
+                }
+            }
+            return courseTimeList;
+        }
+
+        private CourseTime CreateCourseTime(string day, string courseStart, string courseEnd)
+        {
+            return new CourseTime
+            {
+                EvenWeek = true,
+                OddWeek = true,
+                Day = day,
+                CourseStart = DateTime.Parse(courseStart),
+                CourseEnd = DateTime.Parse(courseEnd)
+            };
         }
 
         private bool IsCourseTimeColliding(CourseTime courseTime, List<CourseTime> usedTime)

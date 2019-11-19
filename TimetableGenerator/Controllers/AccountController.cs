@@ -225,8 +225,8 @@ namespace TimetableGenerator.Controllers
         private bool IsValidJson(string strInput)
         {
             strInput = strInput.Trim();
-            if ((strInput.StartsWith("{") && strInput.EndsWith("}")) || //For object
-                (strInput.StartsWith("[") && strInput.EndsWith("]"))) //For array
+            if ((strInput.StartsWith("{") && strInput.EndsWith("}")) ||
+                (strInput.StartsWith("[") && strInput.EndsWith("]")))
             {
                 try
                 {
@@ -235,11 +235,10 @@ namespace TimetableGenerator.Controllers
                 }
                 catch (JsonReaderException jex)
                 {
-                    //Exception in parsing json
                     Console.WriteLine(jex.Message);
                     return false;
                 }
-                catch (Exception ex) //some other exception
+                catch (Exception ex)
                 {
                     Console.WriteLine(ex.ToString());
                     return false;
