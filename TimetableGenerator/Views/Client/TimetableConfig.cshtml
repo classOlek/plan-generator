@@ -248,6 +248,19 @@
             <span class="c_X">Inne</span>
         </div>
     </div>
+    <table class="table">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Course Name</th>
+                <th scope="col">Lecturer</th>
+                <th scope="col">Course Code</th>
+            </tr>
+        </thead>
+        <tbody id="courseCodesTable">
+            
+        </tbody>
+    </table>
 
 </div>
 
@@ -409,6 +422,26 @@
         }
     };
 
+    function generateCourseCodeEntry(data, nr) {
+        var entryTr = document.createElement("tr");
+        var th = document.createElement("th");
+        var td1 = document.createElement("td");
+        var td2 = document.createElement("td");
+        var td3 = document.createElement("td");
+        th.scope = "row";
+        th.innerHTML = nr;
+        td1.innerHTML = data['courseName'];
+        td2.innerHTML = data['prowadzacy'];
+        td3.innerHTML = data['kod_grupy'];
+
+        entryTr.append(th);
+        entryTr.append(td1);
+        entryTr.append(td2);
+        entryTr.append(td3);
+
+        return entryTr;
+    }
+
     function generateEntry(entryData) {
         var baseDatetime = new Date('1970-01-01T07:00:00Z');
         var hourString = entryData['godzina'].split(" ")[1].split(",")[0];
@@ -498,6 +531,7 @@
         var dayWednesday = document.getElementById('dayWednesday');
         var dayThursday = document.getElementById('dayThursday');
         var dayFriday = document.getElementById('dayFriday');
+        var courseCodesTable = document.getElementById('courseCodesTable');
         for (var i = 0; i < timetableData[index]['groupList'].length; i++) {
             var data = timetableData[index]['groupList'][i];
             var entry = generateEntry(data);
@@ -512,6 +546,7 @@
             } else if (data['godzina'].includes("pt")) {
                 dayFriday.append(entry);
             }
+            courseCodesTable.append(generateCourseCodeEntry(data, i+1));
         }
 
         if (isResponsive) {
