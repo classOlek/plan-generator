@@ -4,7 +4,7 @@
     element.classList.add('list-group-item');
     element.classList.add('noClassesBefore');
     element.innerHTML = `<div class="container"><div class="row">
-                        <div class="col" style="font-size: 10px;">
+                        <div class="col" style="font-size: 15px;">
                             No classes before
                         </div>
                         <div class="col-md-3">
@@ -46,7 +46,7 @@ function addNoClassesAfter(elementId, parentId, day, hour) {
     element.classList.add('list-group-item');
     element.classList.add('noClassesAfter');
     element.innerHTML = `<div class="container"><div class="row">
-                        <div class="col" style="font-size: 10px;">
+                        <div class="col" style="font-size: 15px;">
                             No classes after
                         </div>
                         <div class="col-md-3">

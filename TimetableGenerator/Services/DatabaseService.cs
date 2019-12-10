@@ -18,8 +18,7 @@ namespace TimetableGenerator
         {
             MongoClientSettings settings = new MongoClientSettings
             {
-                Server = new MongoServerAddress(Configuration.DatabaseIpAddress, Configuration.DatabasePort),
-                UseSsl = false
+                Server = new MongoServerAddress(Configuration.DatabaseIpAddress, Configuration.DatabasePort)
             };
             client = new MongoClient(settings);
         }

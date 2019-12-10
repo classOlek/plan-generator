@@ -17,13 +17,13 @@ namespace TimetableGeneratorTest
         {
             TimetableGeneratorService timetableGeneratorService = new TimetableGeneratorService();
 
-            Assert.Empty(timetableGeneratorService.GenerateTimetableList(new TimetableData { CourseList = new List<CourseData>() }, ""));
-            Assert.Single(timetableGeneratorService.GenerateTimetableList(new TimetableData { CourseList = GetCourseDataMock() }, ""));
-            Assert.Single(timetableGeneratorService.GenerateTimetableList(new TimetableData { CourseList = GetCourseDataMock().Concat(GetCourseDataMock()) }, ""));
-            Assert.Equal(2, timetableGeneratorService.GenerateTimetableList(new TimetableData { CourseList = GetCourseWithTwoGroupsDataMock() }, "").Count());
-            Assert.Equal(2, timetableGeneratorService.GenerateTimetableList(new TimetableData { CourseList = GetCourseWithTwoGroupsDataMock().Concat(GetCourseDataMock()) }, "").Count());
-            Assert.Equal(4, timetableGeneratorService.GenerateTimetableList(new TimetableData { CourseList = GetCourseWithTwoGroupsDataMock().Concat(GetCourseWithTwoGroupsDataMock()) }, "").Count());
-            Assert.Equal(8, timetableGeneratorService.GenerateTimetableList(new TimetableData { CourseList = GetCourseWithTwoGroupsDataMock().Concat(GetCourseWithTwoGroupsDataMock()).Concat(GetCourseWithTwoGroupsDataMock()) }, "").Count());
+            Assert.Empty(timetableGeneratorService.GenerateTimetableList(new TimetableData { CourseList = new List<CourseData>(), CourseLecturerSettings = GetCourseLecturerSettings() }, ""));
+            Assert.Single(timetableGeneratorService.GenerateTimetableList(new TimetableData { CourseList = GetCourseDataMock(), CourseLecturerSettings = GetCourseLecturerSettings() }, ""));
+            Assert.Single(timetableGeneratorService.GenerateTimetableList(new TimetableData { CourseList = GetCourseDataMock().Concat(GetCourseDataMock()), CourseLecturerSettings = GetCourseLecturerSettings() }, ""));
+            Assert.Equal(2, timetableGeneratorService.GenerateTimetableList(new TimetableData { CourseList = GetCourseWithTwoGroupsDataMock(), CourseLecturerSettings = GetCourseLecturerSettings() }, "").Count());
+            Assert.Equal(2, timetableGeneratorService.GenerateTimetableList(new TimetableData { CourseList = GetCourseWithTwoGroupsDataMock().Concat(GetCourseDataMock()), CourseLecturerSettings = GetCourseLecturerSettings() }, "").Count());
+            Assert.Equal(4, timetableGeneratorService.GenerateTimetableList(new TimetableData { CourseList = GetCourseWithTwoGroupsDataMock().Concat(GetCourseWithTwoGroupsDataMock()), CourseLecturerSettings = GetCourseLecturerSettings() }, "").Count());
+            Assert.Equal(8, timetableGeneratorService.GenerateTimetableList(new TimetableData { CourseList = GetCourseWithTwoGroupsDataMock().Concat(GetCourseWithTwoGroupsDataMock()).Concat(GetCourseWithTwoGroupsDataMock()), CourseLecturerSettings = GetCourseLecturerSettings() }, "").Count());
         }
 
         private IEnumerable<CourseData> GetCourseDataMock()
@@ -43,6 +43,11 @@ namespace TimetableGeneratorTest
                     }
                 }
             } };
+        }
+
+        private List<CourseLecturerSettings> GetCourseLecturerSettings()
+        {
+            return new List<CourseLecturerSettings>();
         }
 
         private IEnumerable<CourseData> GetCourseWithTwoGroupsDataMock()

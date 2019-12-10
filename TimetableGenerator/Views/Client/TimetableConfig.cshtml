@@ -61,9 +61,9 @@
                             @for (int i = 1; i <= Model.TimetableDataList.Count(); i++)
                             {
                                 <tr style="border: 1px solid rgba(0, 0, 0, 0.125);">
-                                    <th scope="row" style="font-size: 10px;">@i</th>
-                                    <td style="font-size: 10px;">@Model.TimetableDataList.ElementAt(i - 1).SourceName</td>
-                                    <td style="font-size: 10px;">@Model.TimetableDataList.ElementAt(i - 1).CourseList.Count()</td>
+                                    <th scope="row" style="font-size: 15px;">@i</th>
+                                    <td style="font-size: 15px;">@Model.TimetableDataList.ElementAt(i - 1).SourceName</td>
+                                    <td style="font-size: 15px;">@Model.TimetableDataList.ElementAt(i - 1).CourseList.Count()</td>
                                     <td><input type="submit" onclick="showModal(@Model.TimetableDataList.ElementAt(i - 1).HashCode)" class="btn btn-primary" value=">" /></td>
                                 </tr>
                             }
@@ -248,20 +248,7 @@
             <span class="c_X">Inne</span>
         </div>
     </div>
-    <table class="table">
-        <thead class="thead-light">
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Course Name</th>
-                <th scope="col">Lecturer</th>
-                <th scope="col">Course Code</th>
-            </tr>
-        </thead>
-        <tbody id="courseCodesTable">
-            
-        </tbody>
-    </table>
-
+    
 </div>
 
 <script>
@@ -398,7 +385,7 @@
             .then(data => data.json())
             .then(data => {
                 if (data['response'] == 'success') {
-                    content.innerHTML = '<nav aria-label="..."> <ul class="pagination"> <li class="page-item"> <button class="page-link" onclick="prevTimetable()" tabindex="-1"><<</button> </li> <li class="page-item disabled"> <button id="curTim" class="page-link">0/0</button> </li> <li class="page-item"> <button class="page-link" onclick="nextTimetable()">>></button> </li> </ul> </nav><div id="timCont"></div><div id="timContImg"></div>';
+                    content.innerHTML = '<nav aria-label="..."> <ul class="pagination"> <li class="page-item"> <button class="page-link" onclick="prevTimetable()" tabindex="-1"><<</button> </li> <li class="page-item disabled"> <button id="curTim" class="page-link">0/0</button> </li> <li class="page-item"> <button class="page-link" onclick="nextTimetable()">>></button> </li> </ul> </nav><div id="timCont"></div><div id="timContImg"></div><table class="table"><thead class="thead-light"><tr><th scope="col">#</th><th scope="col">Course Name</th><th scope="col">Lecturer</th><th scope="col">Course Code</th></tr></thead><tbody id="courseCodesTable"></tbody></table>';
                     timetableData = data['data'];
                     timetableCurrent = 1;
                     prevTimetable();
@@ -532,6 +519,7 @@
         var dayThursday = document.getElementById('dayThursday');
         var dayFriday = document.getElementById('dayFriday');
         var courseCodesTable = document.getElementById('courseCodesTable');
+        courseCodesTable.innerHTML = "";
         for (var i = 0; i < timetableData[index]['groupList'].length; i++) {
             var data = timetableData[index]['groupList'][i];
             var entry = generateEntry(data);
@@ -554,8 +542,7 @@
             html2canvas(document.getElementById('timCont'),{
                 scrollX: 0,
                 scrollY: 0,
-                width: 1000,
-                height: 1000
+                width: 1000
             }).then(can => {
                 console.log('t');
                 var canvasImg = can.toDataURL("image/jpg");

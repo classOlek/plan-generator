@@ -19,7 +19,14 @@ namespace TimetableGenerator.Services
         public IEnumerable<Timetable> GenerateTimetableList(TimetableData data, string conditions)
         {
             List<Timetable> returnList = new List<Timetable>();
-            List<CourseTime> courseTime = ParseConditionsToCourseTime(conditions);
+            List<CourseTime> courseTime = null;
+            if (conditions != "")
+            {
+                courseTime = ParseConditionsToCourseTime(conditions);
+            } else
+            {
+                courseTime = new List<CourseTime>();
+            }
             Rec(SetupCourseData(data), new List<CourseDetails>(), courseTime, ref returnList);
             return returnList;
         }
@@ -32,10 +39,13 @@ namespace TimetableGenerator.Services
                 courseList.RemoveAt(courseList.Count() - 1);
                 foreach(CourseDetails group in courseData.GroupList)
                 {
+                    string[] splittedStatus = group.Status.Split("/");
+                    int currentStudents = int.Parse(splittedStatus[0]);
+                    int maxStudents = int.Parse(splittedStatus[1]);
                     if (returnList.Count() < ResultLimit)
                     {
                         CourseTime courseTime = GetCourseTime(group);
-                        if (!IsCourseTimeColliding(courseTime, usedTime))
+                        if (!IsCourseTimeColliding(courseTime, usedTime) && currentStudents < maxStudents)
                         {
                             List<CourseTime> usedTimeCopy = usedTime.ToList();
                             if (courseTime != null && !(IgnoreLectures && group.Type == LECTURE_TYPE)) usedTimeCopy.Add(courseTime);
